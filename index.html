@@ -243,6 +243,21 @@
 @media(max-width:1100px){.cp-rings{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){.cp-rings{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cp-ring-card{padding:10px 6px}.cp-ring{width:58px;height:58px}}
 
+
+.cp-performance-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.cp-performance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cp-metric-card{background:#0b1b2c;border:1px solid #30465e;border-radius:11px;padding:13px;min-width:0}
+.cp-metric-card strong{display:block;font-size:22px;color:#62d8ef;margin:5px 0}
+.cp-metric-card span{font-size:10px;color:#9db1c8}
+.cp-metric-change{font-size:10px;font-weight:800;margin-top:7px}
+.cp-metric-change.good{color:#80e6b9}.cp-metric-change.bad{color:#ff9a9a}.cp-metric-change.neutral{color:#f2d17a}
+.cp-performance-action{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:#0b1b2c;border:1px solid #30465e;border-radius:10px;padding:12px;margin-bottom:9px}
+.cp-performance-action strong{font-size:12px}.cp-performance-action p{font-size:11px;color:#a9bbcf;margin:5px 0}.cp-performance-action small{font-size:10px;color:#9db1c8}
+.cp-action-status{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;background:#34465a;color:#dce9f4}
+.cp-action-status.progress{background:#4b401f;color:#ffe39a}.cp-action-status.done{background:#164b3d;color:#9af0c9}
+@media(max-width:900px){.cp-performance-kpis,.cp-performance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.cp-performance-kpis,.cp-performance-grid{grid-template-columns:1fr 1fr}.cp-performance-action{grid-template-columns:1fr}}
+
 </style>
 <style>
 #authGate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 85% 0%,#1c4466,#07111f 55%);display:flex;align-items:center;justify-content:center;padding:22px;font-family:Inter,Segoe UI,Arial,sans-serif;color:#eef6ff}
@@ -575,6 +590,7 @@ function escapeFleetHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&a
       <button class="active" data-cp-tab="home" onclick="cpTab('home')">▦ Overview</button>
       <button data-cp-tab="profile" onclick="cpTab('profile')">◎ My Profile</button>
       <button data-cp-tab="fleet" onclick="cpTab('fleet')">▤ My Fleet</button>
+      <button data-cp-tab="performance" onclick="cpTab('performance')">▥ Fleet Performance</button>
       <button data-cp-tab="cycle" onclick="cpTab('cycle')">◷ Buying Cycle</button>
       <button data-cp-tab="assessment" onclick="cpTab('assessment')">✓ Fleet Assessment</button>
       <button data-cp-tab="routes" onclick="cpTab('routes')">⌁ My Routes</button>
@@ -680,6 +696,20 @@ function escapeFleetHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&a
         <div class="cp-actions"><button class="cp-btn" onclick="cpSaveVehicles()">Save fleet</button><span class="cp-muted" id="cpFleetMsg">Your fleet is customer-declared until evidence is reviewed.</span></div>
        </div>
       </section>
+
+      <section class="cp-section" id="cpSec-performance" hidden>
+       <div class="cp-panel">
+        <div class="cp-banner"><div><h3>My Fleet Performance</h3><p class="cp-muted">Telematics insights for your connected UD vehicles, with practical actions to improve fleet performance.</p></div><span class="cp-chip">DEMO DATA · NOT LIVE</span></div>
+        <div class="cp-note"><b>Demonstration dashboard:</b> Figures are illustrative sample data, not live vehicle information. This pilot is not yet connected to the SSA Telematics Agent or a live telematics source. In production, authorised vehicle data will be securely provided to KIZUNA.</div>
+        <div class="cp-kpis cp-performance-kpis" id="cpTelematicsKpis"></div>
+       </div>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>Monthly performance summary</h3><p class="cp-muted">Compare the latest reporting period with the previous month.</p></div><select id="cpTelematicsPeriod" onchange="cpRenderPerformance()" style="max-width:180px"><option value="oct">October 2026</option><option value="nov" selected>November 2026</option></select></div><div class="cp-performance-grid" id="cpTelematicsMetrics"></div></div>
+       <div class="cp-panel"><h3>Connected UD vehicles</h3><p class="cp-muted">Only vehicles with an active, authorised telematics connection can show vehicle-level performance.</p><div class="cp-table-wrap"><table class="cp-table"><thead><tr><th>Vehicle</th><th>Application</th><th>Distance</th><th>Fuel economy</th><th>Idle time</th><th>Utilisation</th><th>Health</th></tr></thead><tbody id="cpTelematicsVehicles"></tbody></table></div></div>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>Recommended improvement actions</h3><p class="cp-muted">Suggested actions based on the illustrative performance indicators.</p></div><span class="cp-chip">TPOL · CONTINUOUS IMPROVEMENT</span></div><div id="cpTelematicsActions" class="cp-action-list"></div></div>
+       <div class="cp-panel"><h3>Your telematics coverage opportunity</h3><div class="cp-performance-grid" id="cpTelematicsCoverage"></div><p class="cp-muted">Competitor vehicles are included for fleet profiling. KIZUNA does not infer competitor telematics performance unless verified data is supplied through an authorised source.</p></div>
+       <div class="cp-panel"><h3>Monthly performance history</h3><div id="cpTelematicsHistory" class="cp-table-wrap"></div></div>
+      </section>
+
       <section class="cp-section" id="cpSec-cycle" hidden>
        <div class="cp-panel"><h3>My buying and replacement cycle</h3><p class="cp-muted">Tell us how you plan and replace vehicles. Buying cycle and a specific sales opportunity are recorded separately.</p>
         <div class="cp-grid">
@@ -818,7 +848,7 @@ function cpLogin(){const email=document.getElementById('cpEmail').value.trim();c
 function cpDemoLogin(){document.getElementById('cpEmail').value='fleet.manager@example.com';document.getElementById('cpPassword').value='KizunaPilot2026';cpUser='fleet.manager@example.com';cpEnter()}
 function cpEnter(){document.getElementById('cpLoginView').hidden=true;document.getElementById('cpAppView').hidden=false;document.getElementById('cpAccountEmail').textContent=cpUser;document.getElementById('cpWelcome').textContent='Welcome, '+(cpData().profile?.company||'Fleet Manager');cpLoad();cpTab('home')}
 function cpLogout(){cpUser='';document.getElementById('cpLoginView').hidden=false;document.getElementById('cpAppView').hidden=true}
-function cpTab(t){document.querySelectorAll('.cp-section').forEach(s=>s.hidden=s.id!=='cpSec-'+t);document.querySelectorAll('.cp-nav button').forEach(b=>b.classList.toggle('active',b.dataset.cpTab===t));if(t==='home')cpRenderHome();if(t==='routes')cpRenderRoutes();if(t==='evidence')cpRenderEvidence();if(t==='benefits')cpRenderBenefits()}
+function cpTab(t){document.querySelectorAll('.cp-section').forEach(s=>s.hidden=s.id!=='cpSec-'+t);document.querySelectorAll('.cp-nav button').forEach(b=>b.classList.toggle('active',b.dataset.cpTab===t));if(t==='home')cpRenderHome();if(t==='routes')cpRenderRoutes();if(t==='evidence')cpRenderEvidence();if(t==='benefits')cpRenderBenefits();if(t==='performance')cpRenderPerformance()}
 function cpProfile(){return cpData().profile||{}}
 function cpLoad(){
  const d=cpData(),p=d.profile||{};
@@ -863,10 +893,10 @@ function cpRenderHome(){
  const af=['AnnualKm','Fuel','Idle','Availability','Maint','Downtime','Telematics','DataPeriod','Challenges','Help'],ad=af.filter(k=>String(a[k]||'').trim()).length,ap=Math.round(ad/af.length*100);
  const rp=routes.length?Math.round(routes.filter(r=>r.origin&&r.destination&&r.distance&&r.frequency).length/routes.length*100):0;
  const verified=evidence.filter(x=>/verified/i.test(x.status||'')).length,ep=evidence.length?Math.max(50,Math.round(verified/evidence.length*100)):0;
- const c=d.cycle||{},brandCount=Array.isArray(c.Makes)?c.Makes.length:String(c.Makes||'').split(',').filter(x=>x.trim()).length;const cycleFields=['Cycle','ReviewDate','Units12','Units24','PurchaseWindow','BuyingFactors'];const cycleDone=cycleFields.filter(k=>String(c[k]??'').trim()).length+(brandCount?1:0),cyclePct=Math.round(cycleDone/7*100);const rings=[['Customer Profile',pp,'profile',pp===100,`${pd}/${pf.length} details completed`],['My Fleet',fp,'fleet',fp===100&&vehicles.length>0,`${vehicles.length} vehicles registered`],['Buying Cycle',cyclePct,'cycle',cyclePct===100,`${cycleDone}/7 buying-cycle details completed`],['Fleet Assessment',ap,'assessment',ap===100,`${ad}/${af.length} assessment items`],['My Routes',rp,'routes',rp===100&&routes.length>0,`${routes.length} routes registered`],['Evidence Centre',ep,'evidence',evidence.length>0&&verified===evidence.length,`${evidence.length} submitted · ${verified} verified`]];
+ const c=d.cycle||{},brandCount=Array.isArray(c.Makes)?c.Makes.length:String(c.Makes||'').split(',').filter(x=>x.trim()).length;const cycleFields=['Cycle','ReviewDate','Units12','Units24','PurchaseWindow','BuyingFactors'];const cycleDone=cycleFields.filter(k=>String(c[k]??'').trim()).length+(brandCount?1:0),cyclePct=Math.round(cycleDone/7*100);const rings=[['Customer Profile',pp,'profile',pp===100,`${pd}/${pf.length} details completed`],['My Fleet',fp,'fleet',fp===100&&vehicles.length>0,`${vehicles.length} vehicles registered`],['Buying Cycle',cyclePct,'cycle',cyclePct===100,`${cycleDone}/7 buying-cycle details completed`],['Fleet Assessment',ap,'assessment',ap===100,`${ad}/${af.length} assessment items`],['My Routes',rp,'routes',rp===100&&routes.length>0,`${routes.length} routes registered`],['Evidence Centre',ep,'evidence',evidence.length>0&&verified===evidence.length,`${evidence.length} submitted · ${verified} verified`],['Fleet Performance',100,'performance',true,'Demo performance dashboard available']];
  document.getElementById('cpProgressRings').innerHTML=rings.map(r=>`<button class="cp-ring-card ${r[3]?'complete':''}" onclick="cpTab('${r[2]}')"><span class="cp-ring" style="--pct:${r[1]}"><b>${r[1]}%</b></span><span class="cp-ring-title">${r[0]}</span><span class="cp-ring-state">${r[3]?'Complete':r[1]?'In progress':'Not started'}</span></button>`).join('');
  const overall=Math.round(rings.reduce((s,r)=>s+r[1],0)/rings.length),pending=[];
- const tasks=[['Complete customer profile',pp===100,'profile',`${pd}/${pf.length} details`],['Complete core fleet details',fp===100&&vehicles.length>0,'fleet',`${vehicles.length} vehicles registered`],['Complete buying cycle',cyclePct===100,'cycle',`${cycleDone}/7 details`],['Complete fleet assessment',ap===100,'assessment',`${ad}/${af.length} items`],['Register main transport routes',rp===100&&routes.length>0,'routes',`${routes.length} routes`],['Submit supporting evidence',evidence.length>0,'evidence',`${evidence.length} documents`],['Have evidence verified',evidence.length>0&&verified===evidence.length,'evidence',`${verified}/${evidence.length} verified`]];
+ const tasks=[['Complete customer profile',pp===100,'profile',`${pd}/${pf.length} details`],['Complete core fleet details',fp===100&&vehicles.length>0,'fleet',`${vehicles.length} vehicles registered`],['Complete buying cycle',cyclePct===100,'cycle',`${cycleDone}/7 details`],['Complete fleet assessment',ap===100,'assessment',`${ad}/${af.length} items`],['Register main transport routes',rp===100&&routes.length>0,'routes',`${routes.length} routes`],['Submit supporting evidence',evidence.length>0,'evidence',`${evidence.length} documents`],['Have evidence verified',evidence.length>0&&verified===evidence.length,'evidence',`${verified}/${evidence.length} verified`],['Review Fleet Performance','false','performance','Illustrative telematics report available']];
  tasks.filter(t=>!t[1]).forEach(t=>pending.push(t));
  document.getElementById('cpOverallStatus').textContent=`${overall}% overall information progress`;
  document.getElementById('cpActionChecklist').innerHTML=(pending.length?pending.slice(0,5):[['Your information is complete',true,'home','Keep your fleet information updated']]).map(t=>`<div class="cp-action-row"><div><strong>${t[0]}</strong><small>${t[3]}</small></div><button class="cp-btn secondary" onclick="cpTab('${t[2]}')">${t[1]?'Review':'Complete'}</button></div>`).join('');
@@ -925,6 +955,39 @@ function cpRenderBenefits(){
  const bar=document.getElementById('cpBenefitsProgress');if(bar)bar.style.width=next?Math.min(100,Math.round((balance-tier.min)/(next.min-tier.min)*100))+'%':'100%';
  const togo=document.getElementById('cpBenefitsToGo');if(togo)togo.textContent=next?cpFormat(next.min-balance)+' points to '+next.name:'You have reached the highest tier';
  const ledger=document.getElementById('cpPointsLedger');if(ledger){const rows=p.ledger||[];ledger.innerHTML=rows.length?`<table class="cp-points-table"><thead><tr><th>Date</th><th>Activity</th><th>Points</th><th>Status</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${cpEsc(x.date)}</td><td>${cpEsc(x.label)}</td><td class="cp-points-positive">+${cpFormat(x.points)}</td><td><span class="cp-status good">${cpEsc(x.status)}</span></td></tr>`).join('')}</tbody></table>`:'<div class="cp-muted">No points earned yet. Complete your profile and submit it for verification to earn your first 1,000 KIZUNA Points.</div>'}
+}
+
+
+const CP_TELEMATICS_DEMO={
+ oct:{label:'October 2026',fleet:{distance:18420,fuel:2.72,idle:36,util:72,alerts:4},vehicles:[
+  {id:'DEMO-001',model:'Quester GWE 420',app:'Long haul',distance:9820,fuel:2.85,idle:34,util:76,health:'Attention'},
+  {id:'DEMO-003',model:'Quester CWE 370',app:'Regional freight',distance:8600,fuel:2.58,idle:38,util:68,health:'Good'}]},
+ nov:{label:'November 2026',fleet:{distance:19860,fuel:2.90,idle:33,util:78,alerts:2},vehicles:[
+  {id:'DEMO-001',model:'Quester GWE 420',app:'Long haul',distance:10640,fuel:3.02,idle:30,util:82,health:'Good'},
+  {id:'DEMO-003',model:'Quester CWE 370',app:'Regional freight',distance:9220,fuel:2.78,idle:36,util:74,health:'Attention'}]}
+};
+function cpTelematicsActionData(){const d=cpData();d.telematicsActions=d.telematicsActions||{};return d}
+function cpSetTelematicsAction(id,status){const d=cpTelematicsActionData();d.telematicsActions[id]=status;cpSave(d);cpRenderPerformance()}
+function cpRenderPerformance(){
+ const d=cpData(),fleet=d.vehicles||[],ud=fleet.filter(v=>/ud/i.test(v.make||'')),connected=2;
+ const period=document.getElementById('cpTelematicsPeriod')?.value||'nov',cur=CP_TELEMATICS_DEMO[period],prev=CP_TELEMATICS_DEMO[period==='nov'?'oct':'nov'];
+ const kpis=[['CONNECTED UD VEHICLES',connected,'of 2 demo-connected UD trucks'],['DISTANCE TRAVELLED',cur.fleet.distance.toLocaleString()+' km','Across connected demo vehicles'],['AVERAGE FUEL ECONOMY',cur.fleet.fuel.toFixed(2)+' km/L','Higher is better'],['IDLE TIME',cur.fleet.idle+'%','Lower is better']];
+ document.getElementById('cpTelematicsKpis').innerHTML=kpis.map(x=>`<div class="cp-kpi"><strong>${x[1]}</strong><span>${x[0]} · ${x[2]}</span></div>`).join('');
+ const delta=(a,b,lower=false)=>{const v=a-b,good=lower?v<0:v>0;return `<div class="cp-metric-change ${v===0?'neutral':good?'good':'bad'}">${v>0?'+':''}${v.toFixed(1)} vs previous month · ${good?'improving':'review'}</div>`};
+ const metrics=[['Fuel economy',cur.fleet.fuel.toFixed(2)+' km/L',delta(cur.fleet.fuel,prev.fleet.fuel)],['Idle time',cur.fleet.idle+'%',delta(cur.fleet.idle,prev.fleet.idle,true)],['Vehicle utilisation',cur.fleet.util+'%',delta(cur.fleet.util,prev.fleet.util)],['Maintenance / health alerts',cur.fleet.alerts,`<div class="cp-metric-change ${cur.fleet.alerts<prev.fleet.alerts?'good':'neutral'}">${cur.fleet.alerts<prev.fleet.alerts?'Fewer':'Review'} than previous month (${prev.fleet.alerts})</div>`]];
+ document.getElementById('cpTelematicsMetrics').innerHTML=metrics.map(x=>`<div class="cp-metric-card"><span>${x[0]}</span><strong>${x[1]}</strong>${x[2]}</div>`).join('');
+ document.getElementById('cpTelematicsVehicles').innerHTML=cur.vehicles.map(v=>`<tr><td><b>${v.id}</b><br><small>${v.model}</small></td><td>${v.app}</td><td>${v.distance.toLocaleString()} km</td><td>${v.fuel.toFixed(2)} km/L</td><td>${v.idle}%</td><td>${v.util}%</td><td><span class="cp-action-status ${v.health==='Good'?'done':'progress'}">${v.health}</span></td></tr>`).join('');
+ const defs=[
+  {id:'idle',title:'Reduce excessive idling',finding:`Average idle time is ${cur.fleet.idle}%.`,action:'Review idle hotspots by route and depot, agree driver coaching, then compare idle time next month.',target:'Target: reduce idle time by 3 percentage points.'},
+  {id:'fuel',title:'Improve fuel efficiency',finding:`Average fuel economy is ${cur.fleet.fuel.toFixed(2)} km/L.`,action:'Review driving behaviour, route conditions, payload and vehicle health with the dealer.',target:'Target: improve fuel economy by 3% against baseline.'},
+  {id:'util',title:'Improve vehicle utilisation',finding:`Current utilisation is ${cur.fleet.util}%.`,action:'Review vehicle allocation, loading opportunities, waiting time and route planning.',target:'Target: increase productive utilisation by 3 percentage points.'},
+  {id:'maint',title:'Close maintenance alerts',finding:`${cur.fleet.alerts} vehicle health / maintenance alerts need review.`,action:'Ask the UD dealer to review alerts and agree preventative maintenance actions.',target:'Target: review and close all actionable alerts.'}
+ ];
+ const statuses=cpTelematicsActionData().telematicsActions;
+ document.getElementById('cpTelematicsActions').innerHTML=defs.map(a=>{const st=statuses[a.id]||'Open';return `<div class="cp-performance-action"><div><strong>${a.title}</strong><p>${a.finding} ${a.action}</p><small>${a.target}</small></div><div><span class="cp-action-status ${st==='Completed'?'done':st==='In progress'?'progress':''}">${st}</span><div style="display:flex;gap:5px;margin-top:7px;flex-wrap:wrap"><button class="cp-btn secondary" onclick="cpSetTelematicsAction('${a.id}','In progress')">Start</button><button class="cp-btn secondary" onclick="cpSetTelematicsAction('${a.id}','Completed')">Complete</button></div></div></div>`}).join('');
+ const total=fleet.length||20,udCount=ud.length||2;
+ document.getElementById('cpTelematicsCoverage').innerHTML=[['Total registered fleet',total,'All makes in customer fleet register'],['UD vehicles',udCount,'Registered UD trucks'],['Telematics-connected UD vehicles',connected,'Illustrative connected vehicles'],['Potential connectivity opportunity',Math.max(0,udCount-connected),'Subject to equipment and service eligibility']].map(x=>`<div class="cp-metric-card"><span>${x[0]}</span><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+ document.getElementById('cpTelematicsHistory').innerHTML=`<table class="cp-table"><thead><tr><th>Reporting month</th><th>Distance</th><th>Fuel economy</th><th>Idle time</th><th>Utilisation</th><th>Alerts</th></tr></thead><tbody>${['oct','nov'].map(k=>{const f=CP_TELEMATICS_DEMO[k].fleet;return `<tr><td>${CP_TELEMATICS_DEMO[k].label}</td><td>${f.distance.toLocaleString()} km</td><td>${f.fuel.toFixed(2)} km/L</td><td>${f.idle}%</td><td>${f.util}%</td><td>${f.alerts}</td></tr>`}).join('')}</tbody></table>`;
 }
 
 function cpRenderActions(){document.getElementById('cpActionsList').innerHTML='<div class="cp-card"><strong>Fuel efficiency review</strong><p>Agree a baseline and review actual fuel performance by route.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>Route and utilisation review</strong><p>Identify route constraints, utilisation opportunities and operating patterns.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>TPOL fleet assessment</strong><p>Explore telematics visibility, driver coaching, idling and fleet performance opportunities.</p><span class="cp-status">To be discussed</span></div><div class="cp-card"><strong>Customer performance story</strong><p>Measure verified progress over time; publication requires separate customer approval.</p><span class="cp-status">Future milestone</span></div>'}
