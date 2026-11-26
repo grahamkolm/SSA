@@ -232,6 +232,17 @@
 .cp-brand-grid input{width:auto;accent-color:#58d7f5}
 .cp-brand-grid label:has(input:checked){border-color:#58d7f5;background:#123047;color:#eafaff}
 @media(max-width:700px){.cp-brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Compact dashboard progress tiles: keep all six milestones together on desktop. */
+.cp-rings{grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+.cp-ring-card{padding:9px 6px;gap:5px;border-radius:11px}
+.cp-ring{width:62px;height:62px}
+.cp-ring b{font-size:14px}
+.cp-ring-title{font-size:11px;line-height:1.2;text-align:center}
+.cp-ring-state{font-size:10px;line-height:1.2}
+@media(max-width:1100px){.cp-rings{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.cp-rings{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cp-ring-card{padding:10px 6px}.cp-ring{width:58px;height:58px}}
+
 </style>
 <style>
 #authGate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 85% 0%,#1c4466,#07111f 55%);display:flex;align-items:center;justify-content:center;padding:22px;font-family:Inter,Segoe UI,Arial,sans-serif;color:#eef6ff}
