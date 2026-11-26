@@ -126,6 +126,105 @@
 .report-entry{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;text-align:left;border:1px solid rgba(88,215,245,.3);border-radius:15px;background:#10263d;color:#f3f7fc;cursor:pointer;font:inherit}
 .report-entry:hover,.report-entry:focus-visible{border-color:#58d7f5;background:#17334f;outline-offset:3px}.report-entry strong{font-size:19px}.report-entry small{display:block;color:#a9bed2;font-size:13px;margin-top:5px}.report-entry .report-arrow{color:#58d7f5;font-size:23px}
 .reports-footnote{font-size:11px;color:#9db1c8;margin:15px 0 0}
+
+/* Customer Portal Pilot */
+.cp-modal{display:none;position:fixed;inset:0;z-index:30;background:rgba(2,8,16,.88);backdrop-filter:blur(9px);padding:14px;overflow:auto}
+.cp-modal.open{display:block}
+.cp-shell{max-width:1250px;margin:10px auto;background:#0c1b2d;border:1px solid rgba(88,215,245,.28);border-radius:20px;overflow:hidden;box-shadow:0 25px 90px #000b}
+.cp-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;background:linear-gradient(110deg,#142c47,#102036);border-bottom:1px solid #2a4058}
+.cp-brand{font-weight:900;letter-spacing:.12em}.cp-brand span{color:#58d7f5}.cp-sub{font-size:11px;color:#9db1c8}
+.cp-close{background:none;border:0;color:#dce8f4;font-size:28px;cursor:pointer}
+.cp-body{padding:20px 22px 26px}
+.cp-login{max-width:520px;margin:30px auto;padding:26px;background:#11253b;border:1px solid #344b63;border-radius:17px}
+.cp-login h2{margin:0 0 8px;font-size:25px}.cp-login p{color:#9db1c8;font-size:13px}
+.cp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cp-field{display:flex;flex-direction:column;gap:5px;font-size:11px;color:#b8c9da}
+.cp-field input,.cp-field select,.cp-field textarea,.cp-input{width:100%;border:1px solid #3a5069;background:#091727;color:#f3f7fc;border-radius:9px;padding:10px;font:inherit;min-width:0}
+.cp-field textarea{min-height:76px;resize:vertical}
+.cp-btn{border:0;border-radius:9px;padding:10px 15px;background:linear-gradient(100deg,#58d7f5,#8ca6ff);color:#07111f;font-weight:800;cursor:pointer}
+.cp-btn.secondary{background:#1b334d;color:#dce9f5;border:1px solid #415a73}
+.cp-btn.ghost{background:transparent;border:1px solid #40566d;color:#dce9f5}
+.cp-login-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.cp-banner{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.cp-banner h2{margin:0;font-size:24px}.cp-banner p{margin:4px 0;color:#9db1c8;font-size:12px}
+.cp-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px}
+.cp-nav{display:flex;flex-direction:column;gap:6px;background:#102238;border:1px solid #2d435a;border-radius:14px;padding:10px;height:max-content;position:sticky;top:10px}
+.cp-nav button{text-align:left;border:0;background:transparent;color:#b8c9da;padding:10px;border-radius:8px;cursor:pointer;font-size:12px}
+.cp-nav button.active,.cp-nav button:hover{background:#1a3b55;color:#6ee0f8}
+.cp-panel{background:#102238;border:1px solid #2d435a;border-radius:14px;padding:17px;margin-bottom:12px}
+.cp-panel h3{margin:0 0 12px;font-size:14px;letter-spacing:.04em}.cp-muted{font-size:11px;color:#9db1c8}
+.cp-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.cp-kpi{background:#091a2b;border:1px solid #30465e;border-radius:11px;padding:12px}.cp-kpi strong{display:block;font-size:23px;color:#58d7f5}.cp-kpi span{font-size:10px;color:#a9bbcf}
+.cp-progress{height:9px;background:#263b52;border-radius:10px;overflow:hidden;margin:8px 0}.cp-progress span{display:block;height:100%;background:linear-gradient(90deg,#58d7f5,#67e0b0)}
+.cp-table-wrap{overflow:auto}.cp-table{width:100%;border-collapse:collapse;min-width:650px;font-size:11px}.cp-table th,.cp-table td{padding:8px;border-bottom:1px solid #30465e;text-align:left}.cp-table th{color:#9db1c8}
+.cp-table input,.cp-table select{width:100%;min-width:80px;background:#091727;border:1px solid #40566d;color:#f3f7fc;border-radius:6px;padding:7px}
+.cp-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cp-chip{display:inline-block;padding:4px 8px;border:1px solid #3a6073;background:#123044;border-radius:20px;color:#8ee8f8;font-size:10px;margin:2px}
+.cp-status{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;border:1px solid #8b713a;color:#f2d17a;background:#322b1a}
+.cp-status.good{border-color:#367b62;color:#80e6b9;background:#123328}
+.cp-cardgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cp-card{background:#0b1b2c;border:1px solid #30465e;border-radius:11px;padding:13px}
+.cp-card strong{display:block;font-size:13px;margin-bottom:4px}.cp-card p{font-size:11px;color:#9db1c8;margin:4px 0}
+.cp-section[hidden]{display:none!important}
+.cp-file{border:1px dashed #506982;background:#0a1929;border-radius:10px;padding:13px;margin-top:10px}
+.cp-file input{width:100%;color:#dce8f4;font-size:11px;margin-top:8px}
+.cp-note{border-left:3px solid #58d7f5;padding:9px 12px;background:#0b1c2e;color:#b8c9da;font-size:11px;margin:10px 0}
+.cp-map{min-height:220px;border-radius:12px;border:1px solid #3b536b;background:linear-gradient(135deg,#102c3b,#13273b);position:relative;overflow:hidden;padding:20px}
+.cp-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(30deg,transparent 48%,#31566a55 49%,#31566a55 50%,transparent 51%),linear-gradient(145deg,transparent 48%,#31566a55 49%,#31566a55 50%,transparent 51%);background-size:90px 70px}
+.cp-map-inner{position:relative;z-index:1}.cp-map-route{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:12px}.cp-dot{width:9px;height:9px;border-radius:50%;background:#67e0b0;box-shadow:0 0 10px #67e0b0}
+.cp-reward{font-size:28px;color:#67e0b0;font-weight:900}
+@media(max-width:800px){.cp-layout{grid-template-columns:1fr}.cp-nav{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.cp-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.cp-body{padding:12px}.cp-grid,.cp-cardgrid{grid-template-columns:1fr}.cp-nav{grid-template-columns:1fr 1fr}.cp-head{padding:13px}.cp-kpi strong{font-size:19px}}
+
+
+/* Clickable customer completion rings */
+.cp-progress-area{background:#102238;border:1px solid #2d435a;border-radius:14px;padding:16px;margin:0 0 12px}
+.cp-progress-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.cp-progress-heading h3{margin:0;font-size:15px}.cp-progress-heading p{margin:4px 0 0;color:#9db1c8;font-size:11px}
+.cp-rings{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.cp-ring-card{border:1px solid #30465e;background:#0b1b2c;border-radius:12px;padding:12px 8px;color:#eaf3fb;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;transition:.18s}
+.cp-ring-card:hover,.cp-ring-card:focus-visible{border-color:#58d7f5;transform:translateY(-2px);outline:none;background:#10283d}
+.cp-ring{--pct:0;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#58d7f5 calc(var(--pct)*1%),#2a4056 0);position:relative}
+.cp-ring:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#0b1b2c}
+.cp-ring b{position:relative;z-index:1;font-size:17px}
+.cp-ring-title{font-size:11px;font-weight:800;text-align:center;line-height:1.25}
+.cp-ring-state{font-size:10px;color:#9db1c8;text-align:center}
+.cp-ring-card.complete .cp-ring{background:conic-gradient(#67e0b0 100%,#2a4056 0)}
+.cp-ring-card.complete .cp-ring-state{color:#80e6b9}
+.cp-next-actions{margin-top:12px}
+.cp-action-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #30465e}
+.cp-action-row:last-child{border-bottom:0}
+.cp-action-row strong{display:block;font-size:11px}.cp-action-row small{color:#9db1c8;font-size:10px}
+.cp-action-row button{flex-shrink:0}
+@media(max-width:700px){.cp-rings{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:430px){.cp-rings{grid-template-columns:repeat(2,minmax(0,1fr))}.cp-ring{width:68px;height:68px}}
+
+
+/* KIZUNA Points and partner tiers */
+.cp-points-hero{display:grid;grid-template-columns:1.05fr 1.5fr;gap:14px;margin:0 0 12px}
+.cp-points-balance,.cp-tier-panel{background:linear-gradient(125deg,#102c43,#14243a);border:1px solid #31536a;border-radius:14px;padding:16px}
+.cp-points-label{font-size:10px;letter-spacing:.13em;color:#9db1c8;font-weight:800}
+.cp-points-number{font-size:34px;font-weight:900;color:#67e0f5;line-height:1.15;margin:5px 0}
+.cp-points-caption{font-size:11px;color:#a9bbcf}
+.cp-tier-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cp-tier-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid #6d8194;border-radius:30px;padding:6px 11px;font-size:11px;font-weight:900;letter-spacing:.08em;color:#e8eef5;background:#24364a}
+.cp-tier-badge.silver{border-color:#aab8c7;color:#e4edf7;background:#334455}
+.cp-tier-badge.gold{border-color:#c9a54a;color:#ffe39a;background:#473918}
+.cp-tier-badge.platinum{border-color:#74d4df;color:#b8f5ff;background:#17404b}
+.cp-tier-track{height:12px;background:#263d53;border-radius:20px;overflow:hidden;margin:12px 0 7px}
+.cp-tier-track span{height:100%;display:block;width:0;background:linear-gradient(90deg,#58d7f5,#67e0b0);border-radius:20px;transition:width .3s}
+.cp-tier-foot{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:#9db1c8}
+.cp-tier-ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.cp-tier-step{border:1px solid #30465e;border-radius:10px;padding:9px;text-align:center;background:#0b1b2c}
+.cp-tier-step strong{display:block;font-size:11px}.cp-tier-step span{font-size:10px;color:#9db1c8}
+.cp-tier-step.current{border-color:#58d7f5;box-shadow:inset 0 0 0 1px #58d7f5;background:#123047}
+.cp-points-table{width:100%;border-collapse:collapse;font-size:11px}
+.cp-points-table th,.cp-points-table td{padding:9px;border-bottom:1px solid #30465e;text-align:left}
+.cp-points-table th{color:#9db1c8}
+.cp-points-positive{color:#80e6b9;font-weight:900}
+.cp-points-pending{color:#f2d17a}
+@media(max-width:700px){.cp-points-hero{grid-template-columns:1fr}.cp-tier-ladder{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 <style>
 #authGate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 85% 0%,#1c4466,#07111f 55%);display:flex;align-items:center;justify-content:center;padding:22px;font-family:Inter,Segoe UI,Arial,sans-serif;color:#eef6ff}
@@ -230,6 +329,15 @@ body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opac
 <button class="tile" data-desc="Understand dealer performance KPIs, definitions and improvement actions against industry reference figures." data-name="dealer benchmark performance industry kpi financial parts service workshop" data-tag="19 KPIs" data-title="Dealer Benchmarks"><div class="tiletop"><div class="ico"><svg viewbox="0 0 24 24"><path d="M3 3v18h18M7 16v-5m5 5V7m5 9V5"></path></svg></div><span class="arrow">↗</span></div><h3>Dealer Benchmarks</h3><p>19 KPIs, definitions and practical performance improvement actions.</p><span class="tag">19 KPIs</span></button>
 <button class="tile" data-desc="A space to propose, assess and develop new AI use cases that improve everyday work across the business." data-name="ai innovation ideas future" data-tag="COMING SOON" data-title="AI Innovation">
 <div class="tiletop"><div class="ico"><svg viewbox="0 0 24 24"><path d="M9 18h6M10 22h4M8.5 14.5A7 7 0 1 1 15.5 14.5c-.9.7-1.3 1.5-1.5 2.5h-4c-.2-1-.6-1.8-1.5-2.5Z"></path></svg></div><span class="arrow">↗</span></div><h3>AI Innovation</h3><p>Discover new opportunities to work smarter across Africa.</p><span class="tag">COMING SOON</span>
+</button>
+
+<button class="tile" data-desc="Customer-facing portal demonstration: fleet profile, assessment, routes, evidence, benefits and improvement plan." data-name="customer portal fleet assessment routes evidence benefits" data-tag="CUSTOMER PILOT" data-title="Customer Portal" onclick="openCustomerPortal()">
+<div class="tiletop"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-1.5A4.5 4.5 0 0 1 8.5 14h7a4.5 4.5 0 0 1 4.5 4.5V20"/><circle cx="12" cy="7" r="4"/><path d="M19 8h3m-1.5-1.5v3"/></svg></div><span class="arrow">↗</span></div>
+<h3>Customer Portal</h3><p>Customer login, fleet assessment, route intelligence, evidence, benefits and improvement tracking.</p><span class="tag">CUSTOMER PILOT</span>
+</button>
+<button class="tile" data-desc="Dealer-assisted customer registration and whole-fleet capture for the Namibia and Zimbabwe pilot." data-name="customer fleet registration namibia zimbabwe pilot" data-tag="PILOT 1" data-title="Customer & Fleet Pilot" onclick="openFleetPilot()">
+<div class="tiletop"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V7l7-4 7 4v13M9 20v-6h6v6M8 9h.01M12 9h.01M16 9h.01"/></svg></div><span class="arrow">↗</span></div>
+<h3>Customer &amp; Fleet Pilot</h3><p>Register customers, capture every vehicle and identify replacement opportunities.</p><span class="tag">NAMIBIA · ZIMBABWE</span>
 </button>
 </main>
 <section class="lower">
@@ -352,4 +460,454 @@ function submitAsk(q){addAskMessage(q,'udask-user');const a=askAnswer(q);addAskM
 document.getElementById('udAskForm').addEventListener('submit',e=>{e.preventDefault();const i=document.getElementById('udAskInput');const q=i.value.trim();if(q){submitAsk(q);i.value=''}});
 document.querySelectorAll('[data-ask]').forEach(b=>b.addEventListener('click',()=>submitAsk(b.dataset.ask)));
 </script>
+
+<div class="reports-modal" id="fleetPilotModal" role="dialog" aria-modal="true" aria-labelledby="fleetPilotTitle">
+ <div class="reports-dialog" style="width:min(1120px,98vw);max-height:94vh;overflow:auto">
+  <div class="reports-header"><div><div class="eyebrow">UD KIZUNA · DEALER HUB PILOT 1</div><h2 id="fleetPilotTitle">Customer &amp; Fleet Registration</h2><p class="reports-sub">Namibia and Zimbabwe · Dealer-assisted pilot · Whole-fleet visibility</p></div><button class="close" onclick="closeFleetPilot()" aria-label="Close">×</button></div>
+  <div class="fleet-tabs"><button class="fleet-tab active" data-tab="register" onclick="showFleetTab('register')">＋ Register customer</button><button class="fleet-tab" data-tab="registers" onclick="showFleetTab('registers')">Registered customers &amp; overview</button></div>
+  <div id="fleetRegisterView">
+   <form id="fleetCustomerForm">
+    <div class="fleet-section"><h3>1. Customer &amp; dealer details</h3><div class="fleet-form-grid">
+     <label>Country<select name="country" required><option value="">Select pilot market</option><option>Namibia</option><option>Zimbabwe</option></select></label>
+     <label>Dealer / branch<input name="dealer" required placeholder="Dealer name"></label>
+     <label>Customer / company name<input name="customer" required placeholder="Registered business name"></label>
+     <label>Customer contact person<input name="contact" placeholder="Fleet manager / owner"></label>
+     <label>Email<input name="email" type="email" placeholder="name@company.com"></label>
+     <label>Telephone<input name="phone" placeholder="+264 / +263"></label>
+     <label>Industry / application<select name="application"><option value="">Select application</option><option>Long-haul / linehaul</option><option>Distribution</option><option>Mining</option><option>Construction</option><option>Agriculture</option><option>Fuel / tanker</option><option>Municipal / government</option><option>Other</option></select></label>
+     <label>Fleet manager / account owner<input name="owner" placeholder="UD / dealer responsible person"></label>
+    </div></div>
+    <div class="fleet-section"><div class="fleet-section-head"><div><h3>2. Entire customer fleet</h3><p>Include UD and competitor vehicles. Unknown fields can be updated later.</p></div><button type="button" class="fleet-add" onclick="addFleetVehicle()">＋ Add vehicle</button></div>
+     <div class="fleet-table-wrap"><table class="fleet-table"><thead><tr><th>Make</th><th>Model</th><th>Year</th><th>Registration / fleet ID</th><th>Application</th><th>Annual km</th><th>Current service provider</th><th>Model / series</th><th>Engine HP</th><th>Axle</th><th>Cab</th><th>Transmission</th><th>Preferred equipment / accessories</th><th></th></tr></thead><tbody id="fleetVehicleRows"></tbody></table></div><div class="fleet-summary" id="fleetVehicleCount">0 vehicles added</div>
+    </div>
+    <div class="fleet-section"><h3>3. Buying cycle &amp; opportunity</h3><div class="fleet-form-grid">
+     <label>Expected next purchase<select name="buyingCycle"><option value="">Select timeframe</option><option>Within 0–6 months</option><option>6–12 months</option><option>12–24 months</option><option>24–36 months</option><option>More than 36 months</option><option>Not yet known</option></select></label>
+     <label>Estimated vehicles to replace / add<input name="plannedUnits" type="number" min="0" placeholder="e.g. 5"></label>
+     <label>Likely replacement makes<input name="replacementMakes" placeholder="UD / competitor / undecided"></label>
+     <label>Primary buying considerations<input name="buyingFactors" placeholder="Price, uptime, fuel, payload, service..."></label>
+    </div><label class="fleet-full">Dealer notes<textarea name="notes" rows="3" placeholder="Customer priorities, fleet plans, opportunities and follow-up actions"></textarea></label></div>
+    <div class="fleet-section">
+     <div class="fleet-section-head"><div><h3>4. Customer routes &amp; transport corridors</h3><p>Customers can enter routes manually, upload an existing route/fleet report, or do both. Include domestic and cross-border routes.</p></div><button type="button" class="fleet-add" onclick="addFleetRoute()">＋ Add route</button></div>
+     <div class="fleet-table-wrap"><table class="fleet-table" style="min-width:980px"><thead><tr><th>Route name</th><th>Origin</th><th>Destination</th><th>Countries</th><th>Distance (km)</th><th>Trips / week</th><th>Vehicles / fleet IDs</th><th>Payload / load</th><th>Route challenges</th><th></th></tr></thead><tbody id="fleetRouteRows"></tbody></table></div>
+     <div class="fleet-summary" id="fleetRouteCount">0 routes added</div>
+     <div class="fleet-upload-box"><label for="fleetRouteFiles">Upload an existing route, GPS, telematics or fleet report</label><input id="fleetRouteFiles" type="file" multiple accept=".pdf,.xlsx,.xls,.csv,.gpx,.kml,.kmz,.jpg,.jpeg,.png,.doc,.docx"><p>Accepted examples: route schedules, GPS exports, telematics reports, trip sheets and fleet spreadsheets. You can upload more than one file.</p><div id="fleetRouteFileList" class="fleet-file-list">No files selected.</div></div>
+    </div>
+    <div class="fleet-section"><h3>5. Customer information &amp; consent</h3><p class="fleet-consent-copy">Explain the purpose of collecting fleet information and intended uses before recording consent. Obtain permission under applicable local law and UD policy. Telematics, driver-level information and marketing permissions should be handled separately where required.</p>
+     <label class="fleet-check"><input type="checkbox" name="dataConsent" required> Customer has been informed about fleet information collection and agreed to the stated purposes.</label>
+     <label class="fleet-check"><input type="checkbox" name="aggregateConsent"> Customer separately agreed that appropriately aggregated / de-identified information may be used for market analysis.</label>
+     <label class="fleet-check"><input type="checkbox" name="contactConsent"> Customer agreed to receive relevant UD / dealer fleet programme communications.</label>
+     <div class="fleet-form-grid"><label>Consent recorded by<input name="consentBy" required placeholder="Dealer representative"></label><label>Consent date<input name="consentDate" type="date" required></label></div>
+    </div>
+    <div class="fleet-actions"><span class="fleet-note">Pilot prototype: records and route details are saved in this browser. File selections are demonstrated locally; secure document storage requires backend integration.</span><button class="fleet-save" type="submit">Save customer &amp; fleet</button></div>
+   </form>
+  </div>
+  <div id="fleetRegistersView" hidden><div class="fleet-kpis" id="fleetPilotKpis"></div><div class="fleet-filters"><label>Market<select id="fleetMarketFilter" onchange="renderFleetRegisters()"><option value="All">All pilot markets</option><option>Namibia</option><option>Zimbabwe</option></select></label><input id="fleetSearch" placeholder="Search customer, dealer or make..." oninput="renderFleetRegisters()"></div><div id="fleetRegistersList"></div><p class="fleet-note">Data entered in this browser is not shared with other users or devices.</p></div>
+ </div>
+</div>
+<style>
+.fleet-tabs{display:flex;gap:8px;border-bottom:1px solid #35445a;padding:10px 0 14px;margin-bottom:15px}.fleet-tab,.fleet-add{background:#1a3049;border:1px solid #40566d;color:#e9f1fa;border-radius:10px;padding:9px 13px;cursor:pointer}.fleet-tab.active{background:#a91b2b;border-color:#ed5267}.fleet-section{border:1px solid #34465d;background:#0d1b2c;border-radius:14px;padding:17px;margin:13px 0}.fleet-section h3{margin:0 0 12px;font-size:14px;color:#fff}.fleet-section p,.fleet-consent-copy{font-size:12px;color:#aabbd0;margin:0 0 12px}.fleet-form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.fleet-section label{display:flex;flex-direction:column;gap:5px;color:#b8c9dc;font-size:11px}.fleet-section input,.fleet-section select,.fleet-section textarea,.fleet-filters input,.fleet-filters select{width:100%;min-width:0;background:#071321;border:1px solid #3b5068;border-radius:8px;color:#f5f7fb;padding:10px;font:inherit;font-size:12px}.fleet-section textarea{resize:vertical}.fleet-section-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.fleet-table-wrap{overflow:auto}.fleet-table{border-collapse:collapse;width:100%;min-width:920px;font-size:11px}.fleet-table th,.fleet-table td{padding:7px;border-bottom:1px solid #263b53;text-align:left}.fleet-table th{color:#9fb5cb}.fleet-table input{min-width:85px;padding:8px}.fleet-remove{background:none;border:0;color:#ff7585;cursor:pointer;font-size:17px}.fleet-summary,.fleet-note{font-size:11px;color:#93a9c0;margin-top:9px}.fleet-full{margin-top:12px}.fleet-check{display:flex!important;flex-direction:row!important;align-items:flex-start;gap:9px!important;margin:10px 0}.fleet-check input{width:auto!important;margin-top:2px}.fleet-actions{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.fleet-save{border:0;border-radius:10px;background:linear-gradient(110deg,#ef4b60,#b9182f);color:#fff;font-weight:800;padding:12px 18px;cursor:pointer}.fleet-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.fleet-kpi{background:#14263c;border:1px solid #34465d;border-radius:12px;padding:13px}.fleet-kpi strong{display:block;font-size:24px;color:#ff6579}.fleet-kpi span{font-size:10px;color:#aabbd0}.fleet-filters{display:flex;gap:10px;margin:14px 0}.fleet-filters label{width:190px}.fleet-record{background:#102238;border:1px solid #34465d;border-radius:12px;padding:14px;margin:9px 0}.fleet-record-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.fleet-record h4{margin:0 0 4px;font-size:15px}.fleet-record p{margin:4px 0;color:#aabbd0;font-size:11px}.fleet-badge{font-size:10px;border:1px solid #a33a4c;color:#ff9aa7;border-radius:20px;padding:4px 8px}.fleet-vehicles{font-size:11px;color:#d6e0ec;margin-top:9px}.fleet-empty{padding:25px;text-align:center;color:#aabbd0;border:1px dashed #40566d;border-radius:12px}.fleet-upload-box{margin-top:14px;padding:14px;border:1px dashed #536b85;border-radius:11px;background:#0a1726}.fleet-upload-box>label{font-size:12px;font-weight:700;color:#e8f0f8;margin-bottom:8px}.fleet-upload-box input[type=file]{padding:9px}.fleet-upload-box p{margin:8px 0;color:#92a9c0;font-size:11px}.fleet-file-list{font-size:11px;color:#d8e3ef;line-height:1.8;overflow-wrap:anywhere}.fleet-file-chip{display:inline-block;background:#1a3049;border:1px solid #40566d;border-radius:7px;padding:4px 8px;margin:3px 5px 0 0}
+@media(max-width:760px){.fleet-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fleet-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.fleet-actions{align-items:flex-start}.fleet-filters{flex-direction:column}.fleet-filters label{width:100%}}@media(max-width:480px){.fleet-form-grid{grid-template-columns:1fr}.fleet-section{padding:12px}.fleet-section-head{align-items:flex-start;flex-direction:column}}
+</style>
+
+
+<script>
+/* Pilot prototype: local-browser storage only; production requires secure backend storage. */
+const FLEET_STORE_KEY='ud-kizuna-africa-pilot-fleet-v1';
+function openFleetPilot(){document.getElementById('fleetPilotModal').classList.add('open');if(!document.querySelector('#fleetVehicleRows tr'))addFleetVehicle();if(!document.querySelector('#fleetRouteRows tr'))addFleetRoute();document.querySelector('[name="consentDate"]').value ||= new Date().toISOString().slice(0,10);renderFleetRegisters();}
+function closeFleetPilot(){document.getElementById('fleetPilotModal').classList.remove('open');}
+document.getElementById('fleetPilotModal').addEventListener('click',e=>{if(e.target.id==='fleetPilotModal')closeFleetPilot();});
+function showFleetTab(tab){document.getElementById('fleetRegisterView').hidden=tab!=='register';document.getElementById('fleetRegistersView').hidden=tab!=='registers';document.querySelectorAll('.fleet-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));if(tab==='registers')renderFleetRegisters();}
+function addFleetVehicle(){const tr=document.createElement('tr');const fields=[['make','Make / brand'],['model','Model'],['year','Year'],['fleetId','Registration / fleet ID'],['application','Application'],['annualKm','Annual km'],['serviceProvider','Current service provider']];tr.innerHTML=fields.map(([n,ph])=>`<td><input name="${n}" placeholder="${ph}" ${n==='year'||n==='annualKm'?'type="number" min="0"':''}></td>`).join('')+'<td><button type="button" class="fleet-remove" aria-label="Remove vehicle" onclick="this.closest(&quot;tr&quot;).remove();updateFleetVehicleCount()">×</button></td>';document.getElementById('fleetVehicleRows').appendChild(tr);updateFleetVehicleCount();}
+function updateFleetVehicleCount(){const n=document.querySelectorAll('#fleetVehicleRows tr').length;document.getElementById('fleetVehicleCount').textContent=n+' vehicle'+(n===1?'':'s')+' added';}
+function readFleetVehicles(){return [...document.querySelectorAll('#fleetVehicleRows tr')].map(tr=>Object.fromEntries([...tr.querySelectorAll('input')].map(i=>[i.name,i.value.trim()]))).filter(v=>Object.values(v).some(Boolean));}
+function addFleetRoute(){const tr=document.createElement('tr');const fields=[['routeName','Route name'],['origin','Origin / town'],['destination','Destination / town'],['countries','Countries crossed'],['distanceKm','Distance km'],['tripsPerWeek','Trips / week'],['vehicleIds','Vehicle IDs / group'],['payload','Typical payload'],['challenges','Road / border challenges']];tr.innerHTML=fields.map(([n,ph])=>`<td><input name="${n}" placeholder="${ph}" ${n==='distanceKm'||n==='tripsPerWeek'?'type="number" min="0"':''}></td>`).join('')+'<td><button type="button" class="fleet-remove" aria-label="Remove route" onclick="this.closest(&quot;tr&quot;).remove();updateFleetRouteCount()">×</button></td>';document.getElementById('fleetRouteRows').appendChild(tr);updateFleetRouteCount();}
+function updateFleetRouteCount(){const n=document.querySelectorAll('#fleetRouteRows tr').length;document.getElementById('fleetRouteCount').textContent=n+' route'+(n===1?'':'s')+' added';}
+function readFleetRoutes(){return [...document.querySelectorAll('#fleetRouteRows tr')].map(tr=>Object.fromEntries([...tr.querySelectorAll('input')].map(i=>[i.name,i.value.trim()]))).filter(r=>Object.values(r).some(Boolean));}
+function readRouteFileMetadata(){return [...(document.getElementById('fleetRouteFiles')?.files||[])].map(f=>({name:f.name,type:f.type||'unknown',size:f.size}));}
+document.getElementById('fleetRouteFiles').addEventListener('change',e=>{const files=[...e.target.files];document.getElementById('fleetRouteFileList').innerHTML=files.length?files.map(f=>`<span class="fleet-file-chip">${escapeFleetHtml(f.name)} · ${(f.size/1024).toFixed(0)} KB</span>`).join(''):'No files selected.';});
+function getFleetRecords(){try{return JSON.parse(localStorage.getItem(FLEET_STORE_KEY)||'[]')}catch(e){return []}}
+document.getElementById('fleetCustomerForm').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f),r=Object.fromEntries(fd.entries());r.vehicles=readFleetVehicles();r.routes=readFleetRoutes();r.routeFiles=readRouteFileMetadata();r.id='FLEET-'+Date.now().toString(36).toUpperCase();r.createdAt=new Date().toISOString();r.recordedBy=activeUser?.name||r.owner||'Dealer pilot user';r.dataConsent=fd.has('dataConsent');r.aggregateConsent=fd.has('aggregateConsent');r.contactConsent=fd.has('contactConsent');const records=getFleetRecords();records.push(r);try{localStorage.setItem(FLEET_STORE_KEY,JSON.stringify(records));alert('Customer and fleet profile saved in this browser.');f.reset();document.getElementById('fleetVehicleRows').innerHTML='';addFleetVehicle();document.getElementById('fleetRouteRows').innerHTML='';updateFleetRouteCount();document.getElementById('fleetRouteFiles').value='';document.getElementById('fleetRouteFileList').textContent='No files selected.';document.querySelector('[name="consentDate"]').value=new Date().toISOString().slice(0,10);showFleetTab('registers');}catch(err){alert('Could not save this record in browser storage.');}});
+function renderFleetRegisters(){const all=getFleetRecords(),market=document.getElementById('fleetMarketFilter')?.value||'All',q=(document.getElementById('fleetSearch')?.value||'').toLowerCase(),filtered=all.filter(r=>(market==='All'||r.country===market)&&JSON.stringify([r.customer,r.dealer,r.country,r.vehicles]).toLowerCase().includes(q)),vehicles=all.reduce((n,r)=>n+(r.vehicles||[]).length,0),ud=all.reduce((n,r)=>n+(r.vehicles||[]).filter(v=>/ud\\s*trucks|^ud$/i.test(v.make||'')).length,0);document.getElementById('fleetPilotKpis').innerHTML=[['CUSTOMERS',all.length],['FLEET VEHICLES',vehicles],['UD VEHICLES',ud],['OTHER MAKES',vehicles-ud]].map(([l,n])=>`<div class="fleet-kpi"><strong>${n}</strong><span>${l}</span></div>`).join('');document.getElementById('fleetRegistersList').innerHTML=filtered.length?filtered.map(r=>`<article class="fleet-record"><div class="fleet-record-head"><div><h4>${escapeFleetHtml(r.customer||'Unnamed customer')}</h4><p>${escapeFleetHtml(r.country)} · ${escapeFleetHtml(r.dealer)} · ${escapeFleetHtml(r.application||'Application not recorded')}</p></div><span class="fleet-badge">${(r.vehicles||[]).length} vehicles · ${escapeFleetHtml(r.buyingCycle||'Buying cycle unknown')}</span></div><p>Contact: ${escapeFleetHtml(r.contact||'Not recorded')} · Expected units: ${escapeFleetHtml(r.plannedUnits||'Not recorded')} · Routes: ${(r.routes||[]).length} · Route files: ${(r.routeFiles||[]).length}</p><div class="fleet-vehicles">${(r.vehicles||[]).map(v=>`${escapeFleetHtml(v.make||'Make unknown')} ${escapeFleetHtml(v.model||'')} (${escapeFleetHtml(v.year||'year n/a')})`).join(' · ')||'No vehicles captured yet'}</div></article>`).join(''):'<div class="fleet-empty">No customer records match this filter yet. Register the first pilot customer.</div>';}
+function escapeFleetHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script>
+
+
+<div class="cp-modal" id="customerPortalModal" aria-modal="true" role="dialog" aria-labelledby="cpTitle">
+ <div class="cp-shell">
+  <div class="cp-head">
+   <div><div class="cp-brand" id="cpTitle">UD <span>KIZUNA</span> CUSTOMER PORTAL</div><div class="cp-sub">Your fleet. Your routes. Your business improvement partnership.</div></div>
+   <button class="cp-close" onclick="closeCustomerPortal()" aria-label="Close portal">×</button>
+  </div>
+  <div class="cp-body">
+   <div id="cpLoginView" class="cp-login">
+    <div class="eyebrow">CUSTOMER ACCESS · PILOT DEMONSTRATION</div>
+    <h2>Welcome to your fleet portal</h2>
+    <p>Access your customer profile, fleet assessment, transport routes, supporting evidence and UD benefits.</p>
+    <div class="cp-grid">
+     <label class="cp-field">Email address<input id="cpEmail" type="email" value="fleet.manager@example.com" autocomplete="username"></label>
+     <label class="cp-field">Password<input id="cpPassword" type="password" value="KizunaPilot2026" autocomplete="current-password"></label>
+    </div>
+    <div class="cp-login-actions"><button class="cp-btn" onclick="cpLogin()">Sign in to customer portal</button><button class="cp-btn secondary" onclick="cpDemoLogin()">Explore demo account</button></div>
+    <div class="cp-note">Pilot simulation: use the pre-filled demo account or enter any email and password. This is not production authentication and does not send invitations.</div>
+   </div>
+   <div id="cpAppView" hidden>
+    <div class="cp-banner"><div><div class="eyebrow">CUSTOMER WORKSPACE</div><h2 id="cpWelcome">Welcome back</h2><p id="cpAccountEmail">fleet.manager@example.com</p></div><div><span class="cp-chip">NAMIBIA & ZIMBABWE PILOT</span> <button class="cp-btn ghost" onclick="cpLogout()">Sign out</button></div></div>
+    <div class="cp-layout">
+     <nav class="cp-nav" aria-label="Customer portal sections">
+      <button class="active" data-cp-tab="home" onclick="cpTab('home')">▦ Overview</button>
+      <button data-cp-tab="profile" onclick="cpTab('profile')">◎ My Profile</button>
+      <button data-cp-tab="fleet" onclick="cpTab('fleet')">▤ My Fleet</button>
+      <button data-cp-tab="cycle" onclick="cpTab('cycle')">◷ Buying Cycle</button>
+      <button data-cp-tab="assessment" onclick="cpTab('assessment')">✓ Fleet Assessment</button>
+      <button data-cp-tab="routes" onclick="cpTab('routes')">⌁ My Routes</button>
+      <button data-cp-tab="evidence" onclick="cpTab('evidence')">▧ Evidence Centre</button>
+      <button data-cp-tab="benefits" onclick="cpTab('benefits')">★ My Benefits</button>
+      <button data-cp-tab="improve" onclick="cpTab('improve')">↗ Improvement Plan</button>
+     </nav>
+     <main>
+      <section class="cp-section" id="cpSec-home">
+
+       <div class="cp-progress-area">
+        <div class="cp-progress-heading"><div><h3>Your UD KIZUNA progress</h3><p>Tap a circle to see what is complete and what you need to do next.</p></div><span class="cp-chip" id="cpOverallStatus">Getting started</span></div>
+        <div class="cp-rings" id="cpProgressRings"></div>
+       </div>
+
+
+       <div class="cp-points-hero">
+        <div class="cp-points-balance"><div class="cp-points-label">YOUR KIZUNA POINTS</div><div class="cp-points-number" id="cpPointsBalance">0</div><div class="cp-points-caption">Points earned from verified participation and programme milestones.</div><div style="margin-top:10px"><span class="cp-chip" id="cpPointsPending">0 points pending review</span></div></div>
+        <div class="cp-tier-panel"><div class="cp-tier-top"><div><div class="cp-points-label">YOUR PARTNER STATUS</div><div style="font-size:21px;font-weight:900;margin-top:4px" id="cpTierName">Bronze Partner</div></div><span class="cp-tier-badge" id="cpTierBadge">◆ BRONZE</span></div><div class="cp-tier-track"><span id="cpTierProgress" style="width:0%"></span></div><div class="cp-tier-foot"><span id="cpTierProgressText">0 / 2,500 points to Silver</span><span id="cpTierNext">Silver</span></div><div class="cp-tier-ladder"><div class="cp-tier-step current" id="cpTierStepBronze"><strong>◆ Bronze</strong><span>0–2,499</span></div><div class="cp-tier-step" id="cpTierStepSilver"><strong>◆ Silver</strong><span>2,500–4,999</span></div><div class="cp-tier-step" id="cpTierStepGold"><strong>◆ Gold</strong><span>5,000–9,999</span></div><div class="cp-tier-step" id="cpTierStepPlatinum"><strong>◆ Platinum</strong><span>10,000+</span></div></div></div>
+       </div>
+
+       <div class="cp-panel"><h3>Fleet partnership overview</h3><div class="cp-kpis" id="cpKpis"></div><div class="cp-muted">Your information helps UD Trucks understand your operation and work with you to improve fleet performance.</div></div>
+       <div class="cp-cardgrid">
+        <div class="cp-card"><strong>Profile completion</strong><div class="cp-progress"><span id="cpProgress" style="width:35%"></span></div><p id="cpProgressText">35% complete · Continue your fleet profile.</p></div>
+        <div class="cp-card"><strong>Verification status</strong><p><span class="cp-status">In progress</span> Your submitted information is being prepared for review.</p></div>
+        <div class="cp-card"><strong>Next vehicle replacement</strong><p id="cpNextReplacement">Add your buying-cycle information to see upcoming replacements.</p></div>
+        <div class="cp-card"><strong>Customer partnership</strong><p>Work with your UD dealer on fleet assessments, route optimisation and TPOL improvement opportunities.</p></div>
+       </div>
+
+       <div class="cp-panel cp-next-actions"><h3>Actions to complete your profile</h3><p class="cp-muted">Select an action to go directly to the relevant section. Submitted information may still require verification.</p><div id="cpActionChecklist"></div></div>
+
+       <div class="cp-panel"><h3>Your next steps</h3><div id="cpNextSteps" class="cp-cardgrid"></div></div>
+      </section>
+      
+      <section class="cp-section" id="cpSec-profile" hidden>
+       <div class="cp-panel"><h3>1. Company information & location</h3><div class="cp-grid">
+        <label class="cp-field">Company / customer name<input id="cpCompany" value="Demo Transport Services"></label>
+        <label class="cp-field">Country<select id="cpCountry"><option>Namibia</option><option>Zimbabwe</option></select></label>
+        <label class="cp-field">Industry / operation<select id="cpIndustry"><option>General freight</option><option>Mining</option><option>Construction</option><option>Fuel and liquids</option><option>Agriculture</option><option>Distribution</option><option>Passenger transport</option><option>Municipal</option><option>Other</option></select></label>
+        <label class="cp-field">Website<input id="cpWebsite" type="url" placeholder="https://"></label>
+        <label class="cp-field">City / town<input id="cpCity" placeholder="e.g. Windhoek"></label>
+        <label class="cp-field">Physical address<input id="cpAddress" placeholder="Street, industrial area, town"></label>
+        <label class="cp-field">GPS latitude<input id="cpLatitude" type="number" step="any" placeholder="-22.5609"></label>
+        <label class="cp-field">GPS longitude<input id="cpLongitude" type="number" step="any" placeholder="17.0658"></label>
+        <label class="cp-field">Total employees<input id="cpEmployees" type="number" min="0"></label>
+        <label class="cp-field">Total drivers<input id="cpDrivers" type="number" min="0"></label>
+       </div><div class="cp-note">Customer and depot locations can support authorised country-level customer mapping. Provide precise coordinates only where authorised.</div></div>
+       <div class="cp-panel"><h3>2. Operating locations & depots</h3><p class="cp-muted">Add the head office and any depots, branches or operating bases.</p>
+        <div class="cp-table-wrap"><table class="cp-table"><thead><tr><th>Location type</th><th>Location / depot name</th><th>City / town</th><th>Country</th><th>GPS latitude</th><th>GPS longitude</th><th></th></tr></thead><tbody id="cpLocationRows"></tbody></table></div>
+        <div class="cp-actions"><button class="cp-btn secondary" onclick="cpAddLocation()">＋ Add operating location</button><button class="cp-btn" onclick="cpSaveProfile()">Save company profile</button></div>
+       </div>
+       <div class="cp-panel"><h3>3. Key contacts & decision makers</h3><div class="cp-grid">
+        <label class="cp-field">Primary contact name<input id="cpContact" value="Fleet Manager"></label>
+        <label class="cp-field">Primary contact telephone<input id="cpPhone" placeholder="+264 / +263"></label>
+        <label class="cp-field">Primary contact email<input id="cpContactEmail" type="email"></label>
+        <label class="cp-field">Fleet manager / account owner<input id="cpOwner"></label>
+        <label class="cp-field">Business owner / managing director<input id="cpBusinessOwner"></label>
+        <label class="cp-field">Procurement contact<input id="cpProcurement"></label>
+        <label class="cp-field">Workshop manager<input id="cpWorkshopManager"></label>
+        <label class="cp-field">Financial decision maker<input id="cpFinanceContact"></label>
+        <label class="cp-field">Final vehicle purchasing decision<select id="cpDecisionMaker"><option value="">Select</option><option>Business owner</option><option>Managing director</option><option>Fleet manager</option><option>Procurement department</option><option>Finance department</option><option>Joint decision</option><option>Other</option></select></label>
+       </div></div>
+       <div class="cp-panel"><h3>4. Workshop & maintenance capability</h3><div class="cp-grid">
+        <label class="cp-field">Do you operate your own workshop?<select id="cpOwnWorkshop"><option value="">Select</option><option>Yes</option><option>No</option><option>Partially / selected depots</option></select></label>
+        <label class="cp-field">Number of workshop bays<input id="cpWorkshopBays" type="number" min="0"></label>
+        <label class="cp-field">Number of mechanics / technicians<input id="cpTechnicians" type="number" min="0"></label>
+        <label class="cp-field">Who performs routine servicing?<select id="cpServicing"><option value="">Select</option><option>Our own workshop</option><option>UD dealer</option><option>Other external workshop</option><option>Combination</option></select></label>
+        <label class="cp-field">Who performs major repairs?<select id="cpMajorRepairs"><option value="">Select</option><option>Our own workshop</option><option>UD dealer</option><option>Other external workshop</option><option>Combination</option></select></label>
+        <label class="cp-field">Maintenance contracts<textarea id="cpMaintenanceContracts"></textarea></label>
+       </div></div>
+       <div class="cp-panel"><h3>5. Historical vehicle specifications & preferences</h3><p class="cp-muted">Capture what you historically operated and what you typically require, including competitor vehicle requirements.</p><div class="cp-grid">
+        <label class="cp-field">Typical engine power<select id="cpPower"><option value="">Select</option><option>Below 300 HP</option><option>300–350 HP</option><option>351–400 HP</option><option>401–450 HP</option><option>Above 450 HP</option><option>Varies by application</option></select></label>
+        <label class="cp-field">Typical axle configuration<select id="cpAxle"><option value="">Select</option><option>4x2</option><option>6x2</option><option>6x4</option><option>8x4</option><option>Other / mixed</option></select></label>
+        <label class="cp-field">Typical cab configuration<select id="cpCab"><option value="">Select</option><option>Day cab</option><option>Sleeper cab</option><option>High-roof sleeper</option><option>Varies</option></select></label>
+        <label class="cp-field">Typical application<select id="cpVehicleApplication"><option value="">Select</option><option>Long haul</option><option>Regional distribution</option><option>Urban distribution</option><option>Construction</option><option>Mining</option><option>Fuel and liquids</option><option>Municipal</option><option>Other / mixed</option></select></label>
+        <label class="cp-field">Transmission preference<select id="cpTransmission"><option value="">Select</option><option>Manual</option><option>Automated manual</option><option>Automatic</option><option>No preference</option></select></label>
+        <label class="cp-field">Typical payload (tonnes)<input id="cpPayload" type="number" min="0" step=".1"></label>
+        <label class="cp-field">Preferred fuel type<select id="cpFuelType"><option value="">Select</option><option>Diesel</option><option>Alternative fuel</option><option>No preference</option></select></label>
+        <label class="cp-field">Preferred vehicle origin<select id="cpOriginPreference"><option value="">Select</option><option>Japanese</option><option>European</option><option>Chinese</option><option>South African / regional</option><option>No preference</option></select></label>
+        <label class="cp-field">Other specification preferences<input id="cpOtherSpecs" placeholder="Retarder, PTO, suspension, body type..."></label>
+       </div></div>
+       <div class="cp-panel"><h3>6. Operating environment</h3><div class="cp-grid">
+        <label class="cp-field">Operating coverage<select id="cpCoverage"><option value="">Select</option><option>Local / city</option><option>National</option><option>Regional cross-border</option><option>International</option></select></label>
+        <label class="cp-field">Cross-border operations<select id="cpCrossBorder"><option value="">Select</option><option>Yes</option><option>No</option><option>Occasionally</option></select></label>
+        <label class="cp-field">Countries operated in<input id="cpCountries"></label>
+        <label class="cp-field">Main commodities / cargo<input id="cpCommodities"></label>
+        <label class="cp-field">Operating hours<select id="cpOperatingHours"><option value="">Select</option><option>Daytime</option><option>24-hour operation</option><option>Shift-based</option><option>Seasonal / variable</option></select></label>
+        <label class="cp-field">Operating environment<select id="cpEnvironment"><option value="">Select</option><option>Highway</option><option>Urban</option><option>Rural / unsealed roads</option><option>Off-road / mining</option><option>Mixed</option></select></label>
+       </div></div>
+       <div class="cp-panel"><h3>7. Customer consent & information use</h3>
+        <label class="cp-field"><span><input type="checkbox" id="cpProfileConsent" style="width:auto"> I confirm that I am authorised to provide this company and fleet information for the UD customer programme.</span></label>
+        <label class="cp-field" style="margin-top:10px"><span><input type="checkbox" id="cpMapConsent" style="width:auto"> I agree that our business/depot locations may be used for authorised UD customer coverage and market analysis.</span></label>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveProfile()">Save complete customer profile</button></div>
+        <div class="cp-note"><b>Pilot reviewer control:</b> In the live platform, only an authorised dealer/UD reviewer can verify the profile and approve points. For this demonstration, use the control below to simulate that approval.</div>
+        <div class="cp-actions"><button class="cp-btn secondary" onclick="cpSimulateProfileVerification()">Simulate profile verification & award 1,000 points</button><span class="cp-muted" id="cpProfileVerificationStatus">Profile not yet verified</span></div>
+
+       </div>
+      </section>
+
+      <section class="cp-section" id="cpSec-fleet" hidden>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>My complete fleet</h3><p class="cp-muted">Include UD Trucks and all other makes so we can understand your full operation.</p></div><button class="cp-btn" onclick="cpAddVehicle()">＋ Add vehicle</button></div>
+        <div class="cp-table-wrap"><table class="cp-table"><thead><tr><th>Make</th><th>Model</th><th>Year</th><th>Registration / ID</th><th>Application</th><th>Annual km</th><th>Current service provider</th><th></th></tr></thead><tbody id="cpVehicleRows"></tbody></table></div>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveVehicles()">Save fleet</button><span class="cp-muted" id="cpFleetMsg">Your fleet is customer-declared until evidence is reviewed.</span></div>
+       </div>
+      </section>
+      <section class="cp-section" id="cpSec-cycle" hidden>
+       <div class="cp-panel"><h3>My buying and replacement cycle</h3><p class="cp-muted">Tell us how you plan and replace vehicles. Buying cycle and a specific sales opportunity are recorded separately.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Normal replacement cycle<select id="cpCycle"><option value="">Select cycle</option><option>3 years</option><option>4 years</option><option>5 years</option><option>6 years</option><option>7 years</option><option>8+ years</option><option>Condition-based / variable</option></select></label>
+         <label class="cp-field">Next planned fleet review<input id="cpReviewDate" type="date"></label>
+         <label class="cp-field">Expected purchases in next 12 months<input id="cpUnits12" type="number" min="0" value="8"></label>
+         <label class="cp-field">Expected purchases in 13–24 months<input id="cpUnits24" type="number" min="0" value="12"></label>
+         <label class="cp-field">Likely purchase window<select id="cpPurchaseWindow"><option>0–6 months</option><option>6–12 months</option><option>12–24 months</option><option>24–36 months</option><option>More than 36 months</option><option>Not yet known</option></select></label>
+         <label class="cp-field">Likely makes being considered<input id="cpMakes" placeholder="UD, competitor brands, undecided"></label>
+        </div><label class="cp-field" style="margin-top:12px">What influences your purchasing decision?<textarea id="cpBuyingFactors" placeholder="Price, uptime, fuel economy, service support, parts, financing, resale value..."></textarea></label>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveCycle()">Save buying cycle</button></div>
+       </div>
+      </section>
+      <section class="cp-section" id="cpSec-assessment" hidden>
+       <div class="cp-panel"><h3>Fleet operational assessment</h3><p class="cp-muted">Establish a baseline. Enter actuals where available and mark estimates honestly; supporting evidence can be uploaded separately.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Average annual distance per vehicle (km)<input id="cpAnnualKm" type="number" min="0" placeholder="e.g. 95000"></label>
+         <label class="cp-field">Average fuel consumption (km/L)<input id="cpFuel" type="number" min="0" step=".01" placeholder="e.g. 2.45"></label>
+         <label class="cp-field">Average idle time (%)<input id="cpIdle" type="number" min="0" max="100" placeholder="e.g. 28"></label>
+         <label class="cp-field">Vehicle availability (%)<input id="cpAvailability" type="number" min="0" max="100" placeholder="e.g. 90"></label>
+         <label class="cp-field">Maintenance cost per km<input id="cpMaint" type="number" min="0" step=".01" placeholder="e.g. 4.20"></label>
+         <label class="cp-field">Average unplanned downtime (days / vehicle / year)<input id="cpDowntime" type="number" min="0" step=".1" placeholder="e.g. 12"></label>
+         <label class="cp-field">Telematics currently used<select id="cpTelematics"><option value="">Select</option><option>UD / TPOL</option><option>Competitor system</option><option>Multiple systems</option><option>None</option><option>Unknown</option></select></label>
+         <label class="cp-field">Data period<select id="cpDataPeriod"><option>Last 3 months</option><option>Last 6 months</option><option>Last 12 months</option><option>Other / mixed</option></select></label>
+        </div>
+        <label class="cp-field" style="margin-top:12px">Main operational challenges<textarea id="cpChallenges" placeholder="Fuel, downtime, route delays, parts availability, driver performance, maintenance..."></textarea></label>
+        <label class="cp-field" style="margin-top:12px">What would you most like UD Trucks to help improve?<textarea id="cpHelp" placeholder="Describe the improvements that matter to your business."></textarea></label>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveAssessment()">Save assessment baseline</button></div>
+       </div>
+       <div class="cp-panel"><h3>Understanding your supplier choices</h3><p class="cp-muted">Optional feedback helps us improve our support. Your answers are treated as customer feedback, not a sales qualification test.</p>
+        <div class="cp-grid">
+         <label class="cp-field">What matters most when choosing a truck?<select id="cpDecision"><option>Purchase price</option><option>Fuel efficiency</option><option>Reliability and uptime</option><option>Parts availability</option><option>Dealer support</option><option>Maintenance cost</option><option>Financing</option><option>Resale value</option><option>Telematics / fleet visibility</option><option>Combination of factors</option></select></label>
+         <label class="cp-field">What could make you consider UD for more of your fleet?<input id="cpConsider" placeholder="Your feedback"></label>
+        </div><div class="cp-actions"><button class="cp-btn secondary" onclick="cpSaveAssessment()">Save feedback</button></div>
+       </div>
+      </section>
+      <section class="cp-section" id="cpSec-routes" hidden>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>My routes and transport corridors</h3><p class="cp-muted">Add routes manually, upload existing reports, or do both. Routes are essential to fleet and TPOL optimisation.</p></div><button class="cp-btn" onclick="cpAddRoute()">＋ Add route</button></div>
+        <div class="cp-table-wrap"><table class="cp-table"><thead><tr><th>Route name</th><th>Origin</th><th>Destination</th><th>Countries crossed</th><th>Distance km</th><th>Trips / week</th><th>Vehicle group</th><th>Payload</th><th>Challenges</th><th></th></tr></thead><tbody id="cpRouteRows"></tbody></table></div>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveRoutes()">Save routes</button></div>
+        <div class="cp-map"><div class="cp-map-inner"><strong>My route overview</strong><p class="cp-muted">Pilot route overview — route lines and country corridors are summarised from customer entries, not live GPS.</p><div id="cpRouteSummary"></div></div></div>
+        <div class="cp-file"><strong>Upload route and fleet reports</strong><p class="cp-muted">Examples: route schedules, fleet spreadsheets, GPS exports, telematics reports and trip records.</p><input type="file" id="cpRouteFiles" multiple accept=".csv,.xlsx,.xls,.pdf,.doc,.docx,.gpx,.kml,.json"><div id="cpRouteFileNames" class="cp-muted">No files selected.</div></div>
+       </div>
+      </section>
+      <section class="cp-section" id="cpSec-evidence" hidden>
+       <div class="cp-panel"><h3>Evidence Centre</h3><p class="cp-muted">Upload documents that support your fleet and assessment information. Documents remain pending until reviewed.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Evidence category<select id="cpEvidenceType"><option>Fleet register</option><option>Vehicle registration documents</option><option>Fuel report</option><option>Telematics / GPS report</option><option>Maintenance invoices</option><option>Downtime report</option><option>Route schedule</option><option>Other supporting document</option></select></label>
+         <label class="cp-field">Related vehicle / fleet group<input id="cpEvidenceVehicle" placeholder="Vehicle registration or fleet group"></label>
+        </div>
+        <div class="cp-file"><strong>Select supporting documents</strong><input type="file" id="cpEvidenceFiles" multiple><div id="cpEvidenceNames" class="cp-muted">No files selected.</div></div>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpAddEvidence()">Submit evidence for review</button></div>
+        <div class="cp-panel" style="margin-top:14px"><h3>My submitted evidence</h3><div id="cpEvidenceList" class="cp-cardgrid"></div></div>
+        <div class="cp-note">Evidence status in this demonstration is simulated. In production, files must be stored in approved secure storage, scanned, access-controlled and reviewed by an authorised dealer or UD reviewer.</div>
+       </div>
+      </section>
+      
+      <section class="cp-section" id="cpSec-benefits" hidden>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>My KIZUNA Points & Benefits</h3><p class="cp-muted">Your participation is recognised through points and partner status.</p></div><span class="cp-tier-badge" id="cpBenefitsTier">◆ BRONZE</span></div>
+        <div class="cp-points-hero">
+         <div class="cp-points-balance"><div class="cp-points-label">AVAILABLE KIZUNA POINTS</div><div class="cp-points-number" id="cpBenefitsBalance">0</div><div class="cp-points-caption">Points are credited when the relevant activity or evidence is verified.</div></div>
+         <div class="cp-tier-panel"><div class="cp-points-label">NEXT PARTNER LEVEL</div><div style="font-size:20px;font-weight:900;margin:5px 0" id="cpBenefitsNext">Silver Partner</div><div class="cp-tier-track"><span id="cpBenefitsProgress"></span></div><div class="cp-tier-foot"><span id="cpBenefitsToGo">2,500 points needed</span><span>Partner progression</span></div></div>
+        </div>
+        <div class="cp-note"><b>Welcome milestone:</b> Complete your Customer Profile and submit the required information. Once reviewed and verified by the dealer/UD team, you earn <b>1,000 KIZUNA Points</b>. Saving a form alone does not trigger the award.</div>
+       </div>
+       <div class="cp-panel"><h3>How to earn KIZUNA Points</h3><div class="cp-table-wrap"><table class="cp-points-table"><thead><tr><th>Activity</th><th>Points</th><th>When awarded</th></tr></thead><tbody>
+        <tr><td>Complete Customer Profile</td><td class="cp-points-positive">1,000</td><td>After profile review and verification</td></tr>
+        <tr><td>Register complete customer fleet</td><td class="cp-points-positive">5,000</td><td>Once, after full fleet register and supporting evidence are verified</td></tr>
+        <tr><td>Verified fleet information update</td><td class="cp-points-positive">1,000</td><td>For an approved periodic update; suggested annual cadence</td></tr>
+        <tr><td>Complete fleet assessment with supporting actuals</td><td class="cp-points-positive">1,000</td><td>After assessment and supporting actuals are reviewed</td></tr>
+        <tr><td>Submit verified route information</td><td class="cp-points-positive">1,000</td><td>After main routes and supporting information are reviewed</td></tr>
+        <tr><td>Submit other required supporting evidence</td><td class="cp-points-positive">500</td><td>For an approved evidence milestone, not per file uploaded</td></tr>
+        <tr><td>Complete TPOL assessment / onboarding</td><td class="cp-points-positive">5,000</td><td>After customer participates and the TPOL baseline is verified</td></tr>
+        <tr><td>Complete agreed TPOL improvement programme</td><td class="cp-points-positive">5,000</td><td>After agreed milestones and measured outcomes are verified</td></tr>
+        <tr><td>Achieve a verified TPOL improvement milestone</td><td class="cp-points-positive">2,500</td><td>For each approved milestone, subject to programme rules</td></tr>
+       </tbody></table></div><p class="cp-muted">Final points values, expiry rules, benefits and programme terms require UD approval before launch.</p></div>
+       
+       <div class="cp-panel"><h3>Pilot reviewer controls · illustrative awards</h3>
+        <p class="cp-muted">For demonstration only. In production, authorised UD/dealer reviewers approve evidence and business rules issue points. These controls are not customer-facing.</p>
+        <div class="cp-cardgrid">
+         <div class="cp-card"><strong>Verify complete fleet register</strong><p>5,000 KIZUNA Points · one-time milestone</p><button class="cp-btn secondary" onclick="cpApproveMilestone('fleet-register',5000,'Complete customer fleet register verified')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Approve verified fleet update</strong><p>1,000 KIZUNA Points · repeatable approved update</p><button class="cp-btn secondary" onclick="cpApproveFleetUpdate()">Simulate approval</button></div>
+         <div class="cp-card"><strong>Verify fleet assessment</strong><p>1,000 KIZUNA Points</p><button class="cp-btn secondary" onclick="cpApproveMilestone('fleet-assessment',1000,'Fleet assessment verified')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Verify route information</strong><p>1,000 KIZUNA Points</p><button class="cp-btn secondary" onclick="cpApproveMilestone('route-information',1000,'Customer route information verified')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Verify supporting evidence milestone</strong><p>500 KIZUNA Points</p><button class="cp-btn secondary" onclick="cpApproveMilestone('supporting-evidence',500,'Supporting evidence milestone verified')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Complete TPOL assessment / onboarding</strong><p>5,000 KIZUNA Points</p><button class="cp-btn secondary" onclick="cpApproveMilestone('tpol-onboarding',5000,'TPOL assessment and onboarding completed')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Complete TPOL improvement programme</strong><p>5,000 KIZUNA Points</p><button class="cp-btn secondary" onclick="cpApproveMilestone('tpol-programme',5000,'TPOL improvement programme completed')">Simulate approval</button></div>
+         <div class="cp-card"><strong>Achieve TPOL improvement milestone</strong><p>2,500 KIZUNA Points per verified milestone</p><button class="cp-btn secondary" onclick="cpApproveTPOLMilestone()">Simulate milestone approval</button></div>
+        </div>
+        <div class="cp-note">Suggested design principle: award points for verified participation and measurable TPOL improvement, not simply for uploading a document or entering a number. Set caps, review cadence and anti-duplication rules before launch.</div>
+       </div>
+
+       <div class="cp-panel"><h3>My points activity</h3><div id="cpPointsLedger" class="cp-table-wrap"></div></div>
+       <div class="cp-panel"><h3>My other UD benefits</h3><div class="cp-cardgrid">
+        <div class="cp-card"><strong>Vehicle purchase benefit</strong><div class="cp-reward" id="cpVehicleBenefit">Qualification in progress</div><p>Potential discount on qualifying UD vehicle purchases, subject to programme rules and approval.</p></div>
+        <div class="cp-card"><strong>Genuine parts benefit</strong><div class="cp-reward">Programme benefit</div><p>Potential parts benefit linked to customer participation and eligibility.</p></div>
+        <div class="cp-card"><strong>Service benefit</strong><div class="cp-reward">Programme benefit</div><p>Potential servicing benefit through participating UD dealers.</p></div>
+        <div class="cp-card"><strong>Participation status</strong><span class="cp-status" id="cpRewardStatus">Profile in progress</span><p>Complete your profile and provide required evidence to progress towards qualification.</p></div>
+       </div><div class="cp-note">KIZUNA Points and partner tiers are a proposed pilot loyalty mechanism. They do not currently represent cash, a guaranteed discount or a redeemable balance. Any redemption, discount value, exclusions, caps and approval rules must be approved by UD Trucks.</div></div>
+      </section>
+
+      <section class="cp-section" id="cpSec-improve" hidden>
+       <div class="cp-panel"><h3>My fleet improvement partnership</h3><p class="cp-muted">Your baseline becomes the starting point for agreed improvement actions with your UD dealer and TPOL support team.</p>
+        <div class="cp-cardgrid">
+         <div class="cp-card"><strong>1. Assess</strong><p>Understand the current fleet, operating conditions, costs and routes.</p></div>
+         <div class="cp-card"><strong>2. Agree</strong><p>Set improvement priorities, owners, targets and review dates together.</p></div>
+         <div class="cp-card"><strong>3. Monitor</strong><p>Review actual operating information and progress over time.</p></div>
+         <div class="cp-card"><strong>4. Demonstrate</strong><p>Measure results and document the value of the partnership.</p></div>
+        </div>
+       </div>
+       <div class="cp-panel"><h3>Improvement actions</h3><div id="cpActionsList" class="cp-cardgrid"></div></div>
+       <div class="cp-panel"><h3>Customer success story</h3><p class="cp-muted">As results are measured and verified, UD may invite you to participate in a customer story. Publication always requires your separate approval.</p><label class="cp-field"><span><input type="checkbox" id="cpStoryConsent" style="width:auto"> I am open to being contacted about a possible customer success story. This is not permission to publish.</span></label></div>
+      </section>
+     </main>
+    </div>
+    <div class="cp-note">Customer pilot demonstration uses browser-local storage on this device only. Do not enter real personal, commercially sensitive or confidential customer data. Production requires secure accounts, central storage, privacy controls and approved integrations.</div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<script>
+/* UD KIZUNA Customer Portal: demonstrator only, local browser storage. */
+const CP_KEY='ud-kizuna-customer-portal-demo-v1';
+let cpUser='';
+function cpData(){try{return JSON.parse(localStorage.getItem(CP_KEY)||'{}')}catch(e){return {}}}
+function cpSave(d){try{localStorage.setItem(CP_KEY,JSON.stringify(d));return true}catch(e){alert('Browser storage is full or unavailable. For this pilot, reduce uploaded file selections and try again.');return false}}
+function openCustomerPortal(){document.getElementById('customerPortalModal').classList.add('open');document.getElementById('cpLoginView').hidden=false;document.getElementById('cpAppView').hidden=true;}
+function closeCustomerPortal(){document.getElementById('customerPortalModal').classList.remove('open')}
+function cpLogin(){const email=document.getElementById('cpEmail').value.trim();const pass=document.getElementById('cpPassword').value;if(!email||!pass){alert('Enter an email address and password to continue.');return}cpUser=email;cpEnter()}
+function cpDemoLogin(){document.getElementById('cpEmail').value='fleet.manager@example.com';document.getElementById('cpPassword').value='KizunaPilot2026';cpUser='fleet.manager@example.com';cpEnter()}
+function cpEnter(){document.getElementById('cpLoginView').hidden=true;document.getElementById('cpAppView').hidden=false;document.getElementById('cpAccountEmail').textContent=cpUser;document.getElementById('cpWelcome').textContent='Welcome, '+(cpData().profile?.company||'Fleet Manager');cpLoad();cpTab('home')}
+function cpLogout(){cpUser='';document.getElementById('cpLoginView').hidden=false;document.getElementById('cpAppView').hidden=true}
+function cpTab(t){document.querySelectorAll('.cp-section').forEach(s=>s.hidden=s.id!=='cpSec-'+t);document.querySelectorAll('.cp-nav button').forEach(b=>b.classList.toggle('active',b.dataset.cpTab===t));if(t==='home')cpRenderHome();if(t==='routes')cpRenderRoutes();if(t==='evidence')cpRenderEvidence();if(t==='benefits')cpRenderBenefits()}
+function cpProfile(){return cpData().profile||{}}
+function cpLoad(){
+ const d=cpData(),p=d.profile||{};
+ Object.entries(p).forEach(([k,v])=>{const el=document.getElementById('cp'+k.charAt(0).toUpperCase()+k.slice(1));if(el){if(el.type==='checkbox')el.checked=!!v;else el.value=v??''}});
+ cpRenderLocations(p.locations||[]);
+ if(d.cycle){Object.entries(d.cycle).forEach(([k,v])=>{const el=document.getElementById('cp'+k);if(el)el.value=v})}
+ if(d.assessment){Object.entries(d.assessment).forEach(([k,v])=>{const el=document.getElementById('cp'+k);if(el)el.value=v})}
+ cpRenderVehicles();cpRenderRoutes();cpRenderEvidence();cpRenderHome();cpRenderActions()
+}
+function cpSaveProfile(){
+ const d=cpData();d.profile={company:cpCompany.value.trim(),country:cpCountry.value,industry:cpIndustry.value,website:cpWebsite.value,city:cpCity.value,address:cpAddress.value,latitude:cpLatitude.value,longitude:cpLongitude.value,employees:cpEmployees.value,drivers:cpDrivers.value,contact:cpContact.value,phone:cpPhone.value,contactEmail:cpContactEmail.value,owner:cpOwner.value,businessOwner:cpBusinessOwner.value,procurement:cpProcurement.value,workshopManager:cpWorkshopManager.value,financeContact:cpFinanceContact.value,decisionMaker:cpDecisionMaker.value,ownWorkshop:cpOwnWorkshop.value,workshopBays:cpWorkshopBays.value,technicians:cpTechnicians.value,servicing:cpServicing.value,majorRepairs:cpMajorRepairs.value,maintenanceContracts:cpMaintenanceContracts.value,power:cpPower.value,axle:cpAxle.value,cab:cpCab.value,vehicleApplication:cpVehicleApplication.value,transmission:cpTransmission.value,payload:cpPayload.value,fuelType:cpFuelType.value,originPreference:cpOriginPreference.value,otherSpecs:cpOtherSpecs.value,coverage:cpCoverage.value,crossBorder:cpCrossBorder.value,countries:cpCountries.value,commodities:cpCommodities.value,operatingHours:cpOperatingHours.value,environment:cpEnvironment.value,profileConsent:cpProfileConsent.checked,mapConsent:cpMapConsent.checked,email:cpUser,locations:cpReadLocations()};cpSave(d);document.getElementById('cpWelcome').textContent='Welcome, '+(d.profile.company||'Fleet Manager');cpRenderHome();alert('Customer profile saved on this device.')}
+
+function cpAddLocation(v={}){const tr=document.createElement('tr');const fields=[['type','Head office / depot'],['name','Location name'],['city','City / town'],['country','Country'],['lat','Latitude'],['lon','Longitude']];tr.innerHTML=fields.map(([n,ph])=>`<td><input data-l="${n}" placeholder="${ph}" value="${cpEsc(v[n]||'')}"></td>`).join('')+`<td><button class="fleet-remove" type="button" onclick="this.closest('tr').remove()">×</button></td>`;document.getElementById('cpLocationRows').appendChild(tr)}
+function cpReadLocations(){return [...document.querySelectorAll('#cpLocationRows tr')].map(tr=>Object.fromEntries([...tr.querySelectorAll('[data-l]')].map(i=>[i.dataset.l,i.value.trim()]))).filter(v=>Object.values(v).some(Boolean))}
+function cpRenderLocations(items=[]){const el=document.getElementById('cpLocationRows');if(!el)return;el.innerHTML='';items.forEach(v=>cpAddLocation(v));if(!items.length)cpAddLocation({type:'Head office',name:'Main office'})}
+function cpAddVehicle(v={}){
+ const tr=document.createElement('tr');
+ const fields=[['make','Make (e.g. UD, Volvo)'],['model','Model (e.g. Quester)'],['year','Year'],['reg','Registration / fleet ID'],['application','Application'],['annualKm','Annual km'],['provider','Current service provider'],['variant','Exact model / series (e.g. CWE, CKE, GWE)'],['hp','Engine power (HP)'],['axle','Axle (e.g. 6x4)'],['cab','Cab (day / sleeper / high roof)'],['transmission','Transmission'],['equipment','Preferred equipment / accessories (e.g. aero kit, bullbar, PTO, retarder)']];
+ tr.innerHTML=fields.map(([n,ph])=>`<td><input data-f="${n}" placeholder="${ph}" value="${cpEsc(v[n]||'')}"></td>`).join('')+`<td><button class="fleet-remove" type="button" onclick="this.closest('tr').remove()">×</button></td>`;
+ document.getElementById('cpVehicleRows').appendChild(tr)
+}
+function cpReadVehicles(){return [...document.querySelectorAll('#cpVehicleRows tr')].map(tr=>Object.fromEntries([...tr.querySelectorAll('[data-f]')].map(i=>[i.dataset.f,i.value.trim()]))).filter(v=>Object.values(v).some(Boolean))}
+function cpRenderVehicles(){document.getElementById('cpVehicleRows').innerHTML='';(cpData().vehicles||[]).forEach(v=>cpAddVehicle(v));if(!document.querySelector('#cpVehicleRows tr')){cpAddVehicle({make:'UD Trucks',model:'Quester',year:'2022',reg:'DEMO-001',application:'Long haul',annualKm:'110000',provider:'UD Dealer',variant:'GWE',hp:'420',axle:'6x4',cab:'Sleeper',transmission:'Automated manual',equipment:'Aero kit; bullbar; retarder'});cpAddVehicle({make:'Volvo',model:'FH',year:'2021',reg:'DEMO-002',application:'Long haul',annualKm:'125000',provider:'Independent workshop',variant:'FH 460',hp:'460',axle:'6x4',cab:'High-roof sleeper',transmission:'Automatic',equipment:'Bullbar; roof lights; fridge'});}}
+function cpSaveVehicles(){const d=cpData();d.vehicles=cpReadVehicles();cpSave(d);document.getElementById('cpFleetMsg').textContent=d.vehicles.length+' vehicles saved · Customer-declared';cpRenderHome();alert('Fleet information saved. It remains customer-declared until verified.')}
+function cpSaveCycle(){const d=cpData();d.cycle={Cycle:cpCycle.value,ReviewDate:cpReviewDate.value,Units12:cpUnits12.value,Units24:cpUnits24.value,PurchaseWindow:cpPurchaseWindow.value,Makes:cpMakes.value,BuyingFactors:cpBuyingFactors.value};cpSave(d);alert('Buying cycle and purchase timing saved separately.');cpRenderHome()}
+function cpSaveAssessment(){const ids=['AnnualKm','Fuel','Idle','Availability','Maint','Downtime','Telematics','DataPeriod','Challenges','Help','Decision','Consider'];const d=cpData();d.assessment={};ids.forEach(k=>d.assessment[k]=document.getElementById('cp'+k).value);cpSave(d);alert('Fleet assessment baseline and customer feedback saved.');cpRenderHome()}
+function cpAddRoute(r={}){const tr=document.createElement('tr');const fields=[['name','Route name'],['origin','Origin'],['destination','Destination'],['countries','Countries'],['distance','Distance km'],['frequency','Trips/week'],['vehicles','Vehicle group'],['payload','Payload'],['challenges','Challenges']];tr.innerHTML=fields.map(([n,ph])=>`<td><input data-r="${n}" placeholder="${ph}" value="${cpEsc(r[n]||'')}"></td>`).join('')+`<td><button class="fleet-remove" type="button" onclick="this.closest('tr').remove()">×</button></td>`;document.getElementById('cpRouteRows').appendChild(tr)}
+function cpReadRoutes(){return [...document.querySelectorAll('#cpRouteRows tr')].map(tr=>Object.fromEntries([...tr.querySelectorAll('[data-r]')].map(i=>[i.dataset.r,i.value.trim()]))).filter(r=>Object.values(r).some(Boolean))}
+function cpRenderRoutes(){const body=document.getElementById('cpRouteRows');if(!body)return;body.innerHTML='';const routes=cpData().routes||[];if(routes.length)routes.forEach(r=>cpAddRoute(r));else{cpAddRoute({name:'Windhoek – Walvis Bay',origin:'Windhoek',destination:'Walvis Bay',countries:'Namibia',distance:'400',frequency:'8',vehicles:'Regional fleet',payload:'General freight',challenges:'Road works / port scheduling'});cpAddRoute({name:'Windhoek – Johannesburg',origin:'Windhoek',destination:'Johannesburg',countries:'Namibia; Botswana; South Africa',distance:'1500',frequency:'2',vehicles:'Long-haul fleet',payload:'Mixed freight',challenges:'Border delays'});}cpRenderRouteSummary()}
+function cpSaveRoutes(){const d=cpData();d.routes=cpReadRoutes();cpSave(d);cpRenderRouteSummary();cpRenderHome();alert('Customer-declared routes saved. Add a route report in the upload area for supporting information.')}
+function cpRenderRouteSummary(){const routes=cpReadRoutes();const el=document.getElementById('cpRouteSummary');if(!el)return;el.innerHTML=routes.length?routes.map(r=>`<div class="cp-map-route"><span class="cp-dot"></span><span><b>${cpEsc(r.origin||'Origin')} → ${cpEsc(r.destination||'Destination')}</b> · ${cpEsc(r.countries||'Country not stated')} · ${cpEsc(r.distance||'—')} km · ${cpEsc(r.frequency||'—')} trips/week</span></div>`).join(''):'<p class="cp-muted">No routes entered yet.</p>'}
+document.addEventListener('change',e=>{if(e.target.id==='cpRouteFiles')document.getElementById('cpRouteFileNames').textContent=[...e.target.files].map(f=>f.name).join(' · ')||'No files selected.';if(e.target.id==='cpEvidenceFiles')document.getElementById('cpEvidenceNames').textContent=[...e.target.files].map(f=>f.name).join(' · ')||'No files selected.'});
+function cpFileMeta(input){return [...(document.getElementById(input)?.files||[])].map(f=>({name:f.name,size:f.size,type:f.type||'unknown'}))}
+function cpAddEvidence(){const files=cpFileMeta('cpEvidenceFiles');if(!files.length){alert('Please select at least one supporting document.');return}const d=cpData();d.evidence=d.evidence||[];files.forEach(f=>d.evidence.push({...f,category:cpEvidenceType.value,related:cpEvidenceVehicle.value,status:'Submitted · awaiting review',date:new Date().toLocaleDateString()}));cpSave(d);document.getElementById('cpEvidenceFiles').value='';document.getElementById('cpEvidenceNames').textContent='No files selected.';cpRenderEvidence();cpRenderHome();alert('Evidence submission recorded in this browser. Files themselves are not uploaded to a secure server in this prototype.')}
+function cpRenderEvidence(){const el=document.getElementById('cpEvidenceList');if(!el)return;const items=cpData().evidence||[];el.innerHTML=items.length?items.map(f=>`<div class="cp-card"><strong>${cpEsc(f.name)}</strong><p>${cpEsc(f.category)} · ${cpEsc(f.related||'General fleet')}</p><p>${cpEsc(f.status)} · ${cpEsc(f.date)}</p></div>`).join(''):'<div class="cp-muted">No evidence submitted yet.</div>'}
+function cpRenderHome(){
+ const d=cpData(),p=d.profile||{},vehicles=d.vehicles||[],routes=d.routes||[],a=d.assessment||{},evidence=d.evidence||[];
+ const ud=vehicles.filter(v=>/ud/i.test(v.make||'')).length,other=vehicles.length-ud;
+ document.getElementById('cpKpis').innerHTML=[['FLEET VEHICLES',vehicles.length],['UD VEHICLES',ud],['OTHER MAKES',other],['ROUTES',routes.length]].map(([l,n])=>`<div class="cp-kpi"><strong>${n}</strong><span>${l}</span></div>`).join('');
+ const pf=['company','country','industry','city','address','drivers','contact','phone','decisionMaker','ownWorkshop','power','axle','vehicleApplication','coverage'],pd=pf.filter(k=>String(p[k]||'').trim()).length,pp=Math.round(pd/pf.length*100);
+ const fp=vehicles.length?Math.round(vehicles.filter(v=>v.make&&v.model&&v.year&&v.reg&&v.application).length/vehicles.length*100):0;
+ const af=['AnnualKm','Fuel','Idle','Availability','Maint','Downtime','Telematics','DataPeriod','Challenges','Help'],ad=af.filter(k=>String(a[k]||'').trim()).length,ap=Math.round(ad/af.length*100);
+ const rp=routes.length?Math.round(routes.filter(r=>r.origin&&r.destination&&r.distance&&r.frequency).length/routes.length*100):0;
+ const verified=evidence.filter(x=>/verified/i.test(x.status||'')).length,ep=evidence.length?Math.max(50,Math.round(verified/evidence.length*100)):0;
+ const rings=[['Customer Profile',pp,'profile',pp===100,`${pd}/${pf.length} details completed`],['My Fleet',fp,'fleet',fp===100&&vehicles.length>0,`${vehicles.length} vehicles registered`],['Fleet Assessment',ap,'assessment',ap===100,`${ad}/${af.length} assessment items`],['My Routes',rp,'routes',rp===100&&routes.length>0,`${routes.length} routes registered`],['Evidence Centre',ep,'evidence',evidence.length>0&&verified===evidence.length,`${evidence.length} submitted · ${verified} verified`]];
+ document.getElementById('cpProgressRings').innerHTML=rings.map(r=>`<button class="cp-ring-card ${r[3]?'complete':''}" onclick="cpTab('${r[2]}')"><span class="cp-ring" style="--pct:${r[1]}"><b>${r[1]}%</b></span><span class="cp-ring-title">${r[0]}</span><span class="cp-ring-state">${r[3]?'Complete':r[1]?'In progress':'Not started'}</span></button>`).join('');
+ const overall=Math.round(rings.reduce((s,r)=>s+r[1],0)/rings.length),pending=[];
+ const tasks=[['Complete customer profile',pp===100,'profile',`${pd}/${pf.length} details`],['Complete core fleet details',fp===100&&vehicles.length>0,'fleet',`${vehicles.length} vehicles registered`],['Complete fleet assessment',ap===100,'assessment',`${ad}/${af.length} items`],['Register main transport routes',rp===100&&routes.length>0,'routes',`${routes.length} routes`],['Submit supporting evidence',evidence.length>0,'evidence',`${evidence.length} documents`],['Have evidence verified',evidence.length>0&&verified===evidence.length,'evidence',`${verified}/${evidence.length} verified`]];
+ tasks.filter(t=>!t[1]).forEach(t=>pending.push(t));
+ document.getElementById('cpOverallStatus').textContent=`${overall}% overall information progress`;
+ document.getElementById('cpActionChecklist').innerHTML=(pending.length?pending.slice(0,5):[['Your information is complete',true,'home','Keep your fleet information updated']]).map(t=>`<div class="cp-action-row"><div><strong>${t[0]}</strong><small>${t[3]}</small></div><button class="cp-btn secondary" onclick="cpTab('${t[2]}')">${t[1]?'Review':'Complete'}</button></div>`).join('');
+ document.getElementById('cpProgress').style.width=overall+'%';document.getElementById('cpProgressText').textContent=overall+'% overall information progress · '+pending.length+' actions outstanding.';
+ document.getElementById('cpNextSteps').innerHTML=tasks.slice(0,4).map(t=>`<div class="cp-card"><strong>${t[1]?'✓':'○'} ${t[0]}</strong><p>${t[3]}</p><button class="cp-btn ghost" style="margin-top:7px" onclick="cpTab('${t[2]}')">${t[1]?'Review':'Continue'}</button></div>`).join('');
+ document.getElementById('cpNextReplacement').textContent=d.cycle?.PurchaseWindow?'Purchase opportunity: '+d.cycle.PurchaseWindow+' · Normal cycle: '+(d.cycle.Cycle||'not stated'):'Add your buying-cycle information to see upcoming replacements.';
+ document.getElementById('cpRewardStatus').textContent=overall>=80?'Ready for programme review':'Profile in progress';document.getElementById('cpVehicleBenefit').textContent=overall>=80?'Review eligible':'In progress';cpRenderPoints();
+}
+
+const CP_PROFILE_POINTS=1000;
+const CP_TIERS=[{name:'Bronze',min:0,max:2499},{name:'Silver',min:2500,max:4999},{name:'Gold',min:5000,max:9999},{name:'Platinum',min:10000,max:Infinity}];
+function cpPointsData(){const d=cpData();d.points=d.points||{balance:0,pending:0,ledger:[],profileAwarded:false};return d}
+function cpTierFor(points){return CP_TIERS.slice().reverse().find(t=>points>=t.min)||CP_TIERS[0]}
+function cpFormat(n){return Number(n||0).toLocaleString('en-ZA')}
+function cpAwardPoints(points,label,reference){const d=cpPointsData();if(d.points.ledger.some(x=>x.reference===reference))return false;d.points.balance+=points;d.points.ledger.unshift({date:new Date().toLocaleDateString(),label,points,reference,status:'Verified'});cpSave(d);return true}
+function cpSimulateProfileVerification(){
+ const d=cpPointsData();if(d.points.profileAwarded){alert('The 1,000-point Customer Profile milestone has already been awarded.');return}
+ if(!d.profile||!d.profile.company||!d.profile.country||!d.profile.profileConsent){alert('First save the company profile and confirm that you are authorised to provide the information.');return}
+ d.points.profileAwarded=true;d.points.pending=0;cpAwardPoints(CP_PROFILE_POINTS,'Customer Profile completed and verified','customer-profile-verified-v1');cpSave(d);document.getElementById('cpProfileVerificationStatus').textContent='Verified · 1,000 KIZUNA Points awarded';cpRenderHome();cpRenderBenefits();alert('Profile verification simulated. 1,000 KIZUNA Points awarded!')}
+
+function cpApproveMilestone(key,points,label){
+ const d=cpPointsData();d.points.approved=d.points.approved||{};
+ if(d.points.approved[key]){alert('This milestone has already been awarded in the demo.');return}
+ d.points.approved[key]=true;cpSave(d);
+ cpAwardPoints(points,label,'milestone-'+key);
+ cpRenderPoints();cpRenderBenefits();alert(cpFormat(points)+' KIZUNA Points awarded for: '+label+'.');
+}
+function cpApproveFleetUpdate(){
+ const d=cpPointsData();d.points.updateCount=(d.points.updateCount||0)+1;cpSave(d);
+ cpAwardPoints(1000,'Verified fleet information update #'+d.points.updateCount,'fleet-update-'+d.points.updateCount);
+ cpRenderPoints();cpRenderBenefits();alert('1,000 KIZUNA Points awarded for a verified fleet update.');
+}
+function cpApproveTPOLMilestone(){
+ const d=cpPointsData();d.points.tpolMilestoneCount=(d.points.tpolMilestoneCount||0)+1;cpSave(d);
+ cpAwardPoints(2500,'Verified TPOL improvement milestone #'+d.points.tpolMilestoneCount,'tpol-improvement-'+d.points.tpolMilestoneCount);
+ cpRenderPoints();cpRenderBenefits();alert('2,500 KIZUNA Points awarded for a verified TPOL improvement milestone.');
+}
+
+function cpRenderPoints(){
+ const d=cpPointsData(),p=d.points,balance=p.balance||0,tier=cpTierFor(balance),next=CP_TIERS[CP_TIERS.findIndex(x=>x.name===tier.name)+1],tierPct=next?Math.min(100,Math.round((balance-tier.min)/(next.min-tier.min)*100)):100;
+ const badge=document.getElementById('cpTierBadge');if(badge){badge.className='cp-tier-badge '+tier.name.toLowerCase();badge.textContent='◆ '+tier.name.toUpperCase()}
+ const name=document.getElementById('cpTierName');if(name)name.textContent=tier.name+' Partner';
+ const bal=document.getElementById('cpPointsBalance');if(bal)bal.textContent=cpFormat(balance);
+ const pending=document.getElementById('cpPointsPending');if(pending)pending.textContent=cpFormat(p.pending||0)+' points pending review';
+ const bar=document.getElementById('cpTierProgress');if(bar)bar.style.width=tierPct+'%';
+ const ptxt=document.getElementById('cpTierProgressText');if(ptxt)ptxt.textContent=next?`${cpFormat(balance-tier.min)} / ${cpFormat(next.min-tier.min)} points in ${tier.name} · ${cpFormat(next.min-balance)} to ${next.name}`:'Top tier achieved';
+ const nxt=document.getElementById('cpTierNext');if(nxt)nxt.textContent=next?next.name:'Top tier';
+ CP_TIERS.forEach(t=>{const el=document.getElementById('cpTierStep'+t.name);if(el)el.classList.toggle('current',t.name===tier.name)});
+ const status=document.getElementById('cpProfileVerificationStatus');if(status)status.textContent=p.profileAwarded?'Verified · 1,000 KIZUNA Points awarded':'Profile not yet verified';
+}
+function cpRenderBenefits(){
+ const d=cpPointsData(),p=d.points,balance=p.balance||0,tier=cpTierFor(balance),next=CP_TIERS[CP_TIERS.findIndex(x=>x.name===tier.name)+1];
+ const b=document.getElementById('cpBenefitsBalance');if(b)b.textContent=cpFormat(balance);
+ const badge=document.getElementById('cpBenefitsTier');if(badge){badge.className='cp-tier-badge '+tier.name.toLowerCase();badge.textContent='◆ '+tier.name.toUpperCase()}
+ const n=document.getElementById('cpBenefitsNext');if(n)n.textContent=next?next.name+' Partner':'Platinum achieved';
+ const bar=document.getElementById('cpBenefitsProgress');if(bar)bar.style.width=next?Math.min(100,Math.round((balance-tier.min)/(next.min-tier.min)*100))+'%':'100%';
+ const togo=document.getElementById('cpBenefitsToGo');if(togo)togo.textContent=next?cpFormat(next.min-balance)+' points to '+next.name:'You have reached the highest tier';
+ const ledger=document.getElementById('cpPointsLedger');if(ledger){const rows=p.ledger||[];ledger.innerHTML=rows.length?`<table class="cp-points-table"><thead><tr><th>Date</th><th>Activity</th><th>Points</th><th>Status</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${cpEsc(x.date)}</td><td>${cpEsc(x.label)}</td><td class="cp-points-positive">+${cpFormat(x.points)}</td><td><span class="cp-status good">${cpEsc(x.status)}</span></td></tr>`).join('')}</tbody></table>`:'<div class="cp-muted">No points earned yet. Complete your profile and submit it for verification to earn your first 1,000 KIZUNA Points.</div>'}
+}
+
+function cpRenderActions(){document.getElementById('cpActionsList').innerHTML='<div class="cp-card"><strong>Fuel efficiency review</strong><p>Agree a baseline and review actual fuel performance by route.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>Route and utilisation review</strong><p>Identify route constraints, utilisation opportunities and operating patterns.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>TPOL fleet assessment</strong><p>Explore telematics visibility, driver coaching, idling and fleet performance opportunities.</p><span class="cp-status">To be discussed</span></div><div class="cp-card"><strong>Customer performance story</strong><p>Measure verified progress over time; publication requires separate customer approval.</p><span class="cp-status">Future milestone</span></div>'}
+function cpEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('customerPortalModal').addEventListener('click',e=>{if(e.target.id==='customerPortalModal')closeCustomerPortal()});
+</script>
+
 </body></html>
