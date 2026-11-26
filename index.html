@@ -233,14 +233,14 @@
 .cp-brand-grid label:has(input:checked){border-color:#58d7f5;background:#123047;color:#eafaff}
 @media(max-width:700px){.cp-brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* Compact dashboard progress tiles: keep all six milestones together on desktop. */
-.cp-rings{grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+/* Compact dashboard progress tiles: eight milestones across two balanced rows. */
+.cp-rings{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
 .cp-ring-card{padding:9px 6px;gap:5px;border-radius:11px}
 .cp-ring{width:62px;height:62px}
 .cp-ring b{font-size:14px}
 .cp-ring-title{font-size:11px;line-height:1.2;text-align:center}
 .cp-ring-state{font-size:10px;line-height:1.2}
-@media(max-width:1100px){.cp-rings{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){.cp-rings{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:600px){.cp-rings{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cp-ring-card{padding:10px 6px}.cp-ring{width:58px;height:58px}}
 
 
@@ -257,6 +257,32 @@
 .cp-action-status.progress{background:#4b401f;color:#ffe39a}.cp-action-status.done{background:#164b3d;color:#9af0c9}
 @media(max-width:900px){.cp-performance-kpis,.cp-performance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.cp-performance-kpis,.cp-performance-grid{grid-template-columns:1fr 1fr}.cp-performance-action{grid-template-columns:1fr}}
+
+
+.cp-tpol-kpi{background:#0b1b2c;border:1px solid #30465e;border-radius:12px;padding:14px;min-width:0}
+.cp-tpol-kpi span{display:block;color:#9db1c8;font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.cp-tpol-kpi strong{display:block;color:#62d8ef;font-size:22px;margin:6px 0;overflow-wrap:anywhere}
+.cp-tpol-kpi small{color:#9db1c8;font-size:10px}
+@media(max-width:700px){#cpSec-tpol .cp-grid{grid-template-columns:1fr!important}#cpSec-tpol .cp-performance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* My Fleet Benchmark module */
+.cp-benchmark-rings{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:14px 0}
+.cp-benchmark-ring{background:#0b1b2c;border:1px solid #30465e;border-radius:12px;padding:13px 8px;text-align:center;min-width:0}
+.cp-benchmark-circle{width:76px;height:76px;border-radius:50%;margin:0 auto 9px;display:grid;place-items:center;background:conic-gradient(#62d8ef calc(var(--pct)*1%),#263b50 0);position:relative}
+.cp-benchmark-circle:before{content:'';position:absolute;inset:7px;border-radius:50%;background:#0b1b2c}
+.cp-benchmark-circle b{position:relative;font-size:15px;color:#eef6ff}
+.cp-benchmark-ring strong{display:block;font-size:11px;line-height:1.25;min-height:28px}
+.cp-benchmark-ring small{display:block;color:#9db1c8;font-size:10px;margin-top:5px;line-height:1.35}
+.cp-benchmark-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cp-benchmark-item{background:#0b1b2c;border:1px solid #30465e;border-radius:11px;padding:13px}
+.cp-benchmark-item h4{margin:0 0 8px;font-size:13px}
+.cp-benchmark-item .cp-field{margin:7px 0}
+.cp-benchmark-item .cp-field input{padding:8px}
+.cp-benchmark-status{font-size:10px;color:#9db1c8;margin-top:7px;line-height:1.4}
+.cp-source-list li{margin:8px 0;color:#b7c9da;font-size:11px;line-height:1.5}
+.cp-source-list a{color:#75d9ef}
+@media(max-width:1000px){.cp-benchmark-rings{grid-template-columns:repeat(3,minmax(0,1fr))}.cp-benchmark-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.cp-benchmark-rings{grid-template-columns:repeat(2,minmax(0,1fr))}.cp-benchmark-grid{grid-template-columns:1fr}}
 
 </style>
 <style>
@@ -591,6 +617,8 @@ function escapeFleetHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&a
       <button data-cp-tab="profile" onclick="cpTab('profile')">◎ My Profile</button>
       <button data-cp-tab="fleet" onclick="cpTab('fleet')">▤ My Fleet</button>
       <button data-cp-tab="performance" onclick="cpTab('performance')">▥ Fleet Performance</button>
+      <button data-cp-tab="tpol" onclick="cpTab('tpol')">◈ My TPOL</button>
+      <button data-cp-tab="benchmark" onclick="cpTab('benchmark')">◎ My Fleet Benchmark</button>
       <button data-cp-tab="cycle" onclick="cpTab('cycle')">◷ Buying Cycle</button>
       <button data-cp-tab="assessment" onclick="cpTab('assessment')">✓ Fleet Assessment</button>
       <button data-cp-tab="routes" onclick="cpTab('routes')">⌁ My Routes</button>
@@ -708,6 +736,103 @@ function escapeFleetHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&a
        <div class="cp-panel"><div class="cp-banner"><div><h3>Recommended improvement actions</h3><p class="cp-muted">Suggested actions based on the illustrative performance indicators.</p></div><span class="cp-chip">TPOL · CONTINUOUS IMPROVEMENT</span></div><div id="cpTelematicsActions" class="cp-action-list"></div></div>
        <div class="cp-panel"><h3>Your telematics coverage opportunity</h3><div class="cp-performance-grid" id="cpTelematicsCoverage"></div><p class="cp-muted">Competitor vehicles are included for fleet profiling. KIZUNA does not infer competitor telematics performance unless verified data is supplied through an authorised source.</p></div>
        <div class="cp-panel"><h3>Monthly performance history</h3><div id="cpTelematicsHistory" class="cp-table-wrap"></div></div>
+      </section>
+
+      <section class="cp-section" id="cpSec-tpol" hidden>
+       <div class="cp-panel">
+        <div class="cp-banner"><div><div class="eyebrow">TOTAL PROFIT OVER LIFETIME</div><h3>My Vehicle Profitability · TPOL</h3><p class="cp-muted">Understand what a vehicle earns, what it costs to operate and own, and the value it can deliver over its working life.</p></div><span class="cp-chip">TPOL PILOT · ILLUSTRATIVE</span></div>
+        <div class="cp-note"><b>How to use this first TPOL model:</b> Start with one vehicle. Enter a representative month of revenue and operating costs, then add ownership and lifetime assumptions. The model separates operating performance from purchase/finance economics and clearly labels the result as an estimate until supported by verified records. Demo values below are examples only — they are not customer or UD performance data.</div>
+        <div class="cp-grid">
+         <label class="cp-field">Vehicle / fleet ID<input id="cpTpolVehicle" value="DEMO-001 · UD Quester GWE"></label>
+         <label class="cp-field">Application<input id="cpTpolApplication" value="Long-haul general freight"></label>
+         <label class="cp-field">Data status<select id="cpTpolStatus"><option>Customer estimate</option><option>Verified actual</option><option>Mixed actual and estimate</option></select></label>
+         <label class="cp-field">Representative month<input id="cpTpolPeriod" value="November 2026" placeholder="e.g. November 2026"></label>
+        </div>
+       </div>
+       <div class="cp-panel"><h3>1. Vehicle investment & lifetime assumptions</h3><p class="cp-muted">Use the original purchase economics and expected working life. Do not enter monthly loan instalments here; finance interest is captured separately to avoid counting capital repayment twice.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Vehicle purchase price (R)<input id="cpTpolPurchase" type="number" min="0" step="1000" value="2200000"></label>
+         <label class="cp-field">Total finance interest over term (R)<input id="cpTpolInterest" type="number" min="0" step="1000" value="350000"></label>
+         <label class="cp-field">Expected resale / residual value (R)<input id="cpTpolResidual" type="number" min="0" step="1000" value="450000"></label>
+         <label class="cp-field">Expected total working life (years)<input id="cpTpolLife" type="number" min="1" max="30" step="0.5" value="8"></label>
+         <label class="cp-field">Time already in service (years)<input id="cpTpolAge" type="number" min="0" max="30" step="0.5" value="3"></label>
+         <label class="cp-field">Average distance per month (km)<input id="cpTpolKm" type="number" min="0" step="100" value="9167"></label>
+        </div>
+       </div>
+       <div class="cp-panel"><h3>2. Monthly revenue & operating costs</h3><p class="cp-muted">Enter the average monthly revenue attributable to this vehicle and its recurring operating costs. Operating costs exclude vehicle purchase price and finance interest.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Monthly revenue generated (R)<input id="cpTpolRevenue" type="number" min="0" step="1000" value="185000"></label>
+         <label class="cp-field">Fuel (R / month)<input id="cpTpolFuel" type="number" min="0" step="500" value="65000"></label>
+         <label class="cp-field">Driver / crew cost (R / month)<input id="cpTpolDriver" type="number" min="0" step="500" value="18000"></label>
+         <label class="cp-field">Maintenance & repairs (R / month)<input id="cpTpolMaint" type="number" min="0" step="500" value="12000"></label>
+         <label class="cp-field">Tyres (R / month)<input id="cpTpolTyres" type="number" min="0" step="500" value="7000"></label>
+         <label class="cp-field">Insurance (R / month)<input id="cpTpolInsurance" type="number" min="0" step="500" value="5000"></label>
+         <label class="cp-field">Licences, permits & tolls (R / month)<input id="cpTpolLicences" type="number" min="0" step="100" value="1500"></label>
+         <label class="cp-field">Other operating costs (R / month)<input id="cpTpolOther" type="number" min="0" step="500" value="6000"></label>
+        </div>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpCalculateTpol(true)">Save TPOL inputs & calculate</button><button class="cp-btn secondary" onclick="cpCalculateTpol(false)">Recalculate</button><span class="cp-muted" id="cpTpolSaveStatus">Illustrative starter values loaded.</span></div>
+       </div>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>3. Your TPOL snapshot</h3><p class="cp-muted">A transparent first estimate based on the inputs above.</p></div><span class="cp-chip" id="cpTpolResultStatus">ESTIMATE</span></div>
+        <div class="cp-performance-grid" id="cpTpolKpis"></div>
+        <div class="cp-grid" style="margin-top:14px">
+         <div class="cp-card"><strong>Lifetime model · how the estimate is built</strong><div id="cpTpolBreakdown" class="cp-muted" style="line-height:1.8;margin-top:8px"></div></div>
+         <div class="cp-card"><strong>What this tells us</strong><div id="cpTpolInterpretation" class="cp-muted" style="line-height:1.8;margin-top:8px"></div></div>
+        </div>
+       </div>
+       <div class="cp-panel"><h3>4. Evidence to strengthen the TPOL result</h3><p class="cp-muted">The dealer and customer can progressively replace estimates with source-backed actuals. In this prototype, evidence references are recorded as text only; documents are not securely uploaded.</p>
+        <div class="cp-grid">
+         <label class="cp-field">Purchase invoice / contract reference<input id="cpTpolPurchaseEvidence" placeholder="Document name or reference"></label>
+         <label class="cp-field">Fuel statement / telematics period<input id="cpTpolFuelEvidence" placeholder="Fuel card report / period"></label>
+         <label class="cp-field">Workshop & maintenance records<input id="cpTpolMaintEvidence" placeholder="Invoices / service history"></label>
+         <label class="cp-field">Revenue / trip records<input id="cpTpolRevenueEvidence" placeholder="Invoices / loads / accounting report"></label>
+        </div><div class="cp-actions"><button class="cp-btn secondary" onclick="cpSaveTpolEvidence()">Save evidence references</button><span class="cp-muted" id="cpTpolEvidenceStatus">No evidence references recorded.</span></div>
+       </div>
+       <div class="cp-panel"><h3>5. Dealer review & improvement opportunities</h3><div class="cp-cardgrid">
+        <div class="cp-card"><strong>Fuel & driving efficiency</strong><p>Compare actual fuel economy by route, payload and driver; identify measurable fuel-saving opportunities.</p><span class="cp-status">Review with dealer</span></div>
+        <div class="cp-card"><strong>Maintenance & uptime</strong><p>Use service history and telematics alerts to reduce unplanned downtime and avoidable repair costs.</p><span class="cp-status">Review with dealer</span></div>
+        <div class="cp-card"><strong>Utilisation & revenue</strong><p>Assess productive days, empty running, loading and route performance before changing revenue assumptions.</p><span class="cp-status">Review with dealer</span></div>
+       </div><div class="cp-note">KIZUNA Points proposal: TPOL onboarding and improvement milestones may qualify for points only after dealer/UD verification. Saving estimated figures does not automatically award points.</div></div>
+       <div class="cp-note"><b>Important model limitations:</b> This is a simplified planning estimate, not an accounting statement or financial advice. It assumes the entered monthly revenue and cost profile is representative across the vehicle's life. It does not yet model tax, inflation, discount rates, working-capital costs, downtime revenue loss, changing payload/route mix, major component replacements or year-by-year depreciation. A production TPOL model should support monthly history and verified data feeds.</div>
+      </section>
+
+      <section class="cp-section" id="cpSec-benchmark" hidden>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>My Fleet Benchmark</h3><p class="cp-muted">Understand your performance, compare it with relevant reference points and track verified improvement.</p></div><span class="cp-chip">BENCHMARK PILOT</span></div>
+        <div class="cp-note"><b>Important:</b> There is no single universal heavy-truck benchmark. Results depend on vehicle specification, application, payload, route, terrain, traffic, fuel quality, maintenance and measurement method. Only the idling reference below is a published historical benchmark; the other targets must be agreed with your dealer using comparable fleet data. No customer or industry result is inferred from the demo.</div>
+        <div class="cp-benchmark-rings" id="cpBenchmarkRings"></div>
+       </div>
+       <div class="cp-panel"><div class="cp-banner"><div><h3>1. Your performance baseline</h3><p class="cp-muted">Enter a consistent reporting period and use verified telematics, fuel, workshop and accounting records wherever possible.</p></div><span class="cp-chip">CUSTOMER INPUT</span></div>
+        <div class="cp-grid">
+         <label class="cp-field">Vehicle / fleet group<input id="cpBenchVehicle" placeholder="e.g. Quester GWE · Long-haul fleet"></label>
+         <label class="cp-field">Application<select id="cpBenchApplication"><option value="">Select application</option><option>Long-haul general freight</option><option>Regional distribution</option><option>Mining</option><option>Construction</option><option>Fuel and liquids</option><option>Urban distribution</option><option>Other</option></select></label>
+         <label class="cp-field">Reporting period<input id="cpBenchPeriod" type="month" value="2026-11"></label>
+         <label class="cp-field">Payload / GCM context<input id="cpBenchPayload" placeholder="e.g. average payload or GCM"></label>
+         <label class="cp-field">Route / terrain context<input id="cpBenchRoute" placeholder="e.g. highway, mixed, mountainous"></label>
+         <label class="cp-field">Data status<select id="cpBenchDataStatus"><option>Customer estimate</option><option>Verified actual</option><option>Mixed actual and estimate</option></select></label>
+        </div>
+       </div>
+       <div class="cp-panel"><h3>2. Six performance indicators</h3><p class="cp-muted">Enter the customer's measured result. Add a comparison target only when it is supported by a source or agreed comparable UD/dealer cohort. Units and definitions must remain consistent.</p>
+        <div class="cp-benchmark-grid">
+         <div class="cp-benchmark-item"><h4>Fuel efficiency</h4><label class="cp-field">Actual (km/L)<input id="cpBenchFuel" type="number" min="0" step="0.01" placeholder="e.g. 2.45"></label><label class="cp-field">Comparison target (km/L)<input id="cpBenchFuelTarget" type="number" min="0" step="0.01" placeholder="Dealer / peer target"></label><div class="cp-benchmark-status">Higher is better. Compare like-for-like vehicle, route and payload.</div></div>
+         <div class="cp-benchmark-item"><h4>Engine idling</h4><label class="cp-field">Actual (% of engine-on time)<input id="cpBenchIdle" type="number" min="0" max="100" step="0.1" placeholder="e.g. 18"></label><label class="cp-field">Reference target (%)<input id="cpBenchIdleTarget" type="number" min="0" max="100" step="0.1" value="5"></label><div class="cp-benchmark-status">Lower is better. 5% is a historical North American long-haul reference, not a universal norm.</div></div>
+         <div class="cp-benchmark-item"><h4>Vehicle utilisation</h4><label class="cp-field">Actual (%)<input id="cpBenchUtil" type="number" min="0" max="100" step="0.1" placeholder="e.g. 72"></label><label class="cp-field">Comparison target (%)<input id="cpBenchUtilTarget" type="number" min="0" max="100" step="0.1" placeholder="Dealer / peer target"></label><div class="cp-benchmark-status">Higher is not always better: consider demand, maintenance windows and fleet capacity.</div></div>
+         <div class="cp-benchmark-item"><h4>Vehicle availability</h4><label class="cp-field">Actual (%)<input id="cpBenchAvail" type="number" min="0" max="100" step="0.1" placeholder="e.g. 94"></label><label class="cp-field">Comparison target (%)<input id="cpBenchAvailTarget" type="number" min="0" max="100" step="0.1" placeholder="Dealer / peer target"></label><div class="cp-benchmark-status">Available time must use an agreed definition of planned and unplanned downtime.</div></div>
+         <div class="cp-benchmark-item"><h4>Maintenance cost</h4><label class="cp-field">Actual (R/km)<input id="cpBenchMaint" type="number" min="0" step="0.01" placeholder="e.g. 1.85"></label><label class="cp-field">Comparison target (R/km)<input id="cpBenchMaintTarget" type="number" min="0" step="0.01" placeholder="Dealer / peer target"></label><div class="cp-benchmark-status">Lower is generally better, but compare vehicle age, coverage and work scope.</div></div>
+         <div class="cp-benchmark-item"><h4>Total operating cost</h4><label class="cp-field">Actual (R/km)<input id="cpBenchCost" type="number" min="0" step="0.01" placeholder="e.g. 14.20"></label><label class="cp-field">Comparison target (R/km)<input id="cpBenchCostTarget" type="number" min="0" step="0.01" placeholder="Dealer / peer target"></label><div class="cp-benchmark-status">Define included cost categories consistently; connect this to TPOL.</div></div>
+        </div>
+        <div class="cp-actions"><button class="cp-btn" onclick="cpSaveBenchmark()">Save benchmark baseline</button><button class="cp-btn secondary" onclick="cpRenderBenchmark()">Refresh circles</button><span class="cp-muted" id="cpBenchSaveStatus">No customer benchmark baseline saved.</span></div>
+       </div>
+       <div class="cp-panel"><h3>3. Your improvement journey</h3><div class="cp-cardgrid" id="cpBenchmarkActions"></div><div class="cp-note">KIZUNA Points proposal: 500 points for a dealer/UD-verified initial benchmark assessment; 250 points for a verified monthly update; and 500 points for a verified improvement milestone. Points are not awarded for entering estimates or merely saving this form. Production rules should include a defined baseline, minimum measurement period, comparable operating conditions and duplicate controls.</div>
+        <div class="cp-actions"><button class="cp-btn secondary" onclick="cpApproveBenchmark('assessment')">Simulate verified benchmark assessment · 500 points</button><button class="cp-btn secondary" onclick="cpApproveBenchmark('improvement')">Simulate verified improvement · 500 points</button><span class="cp-muted" id="cpBenchPointsStatus">Reviewer simulation only.</span></div>
+       </div>
+       <div class="cp-panel"><h3>4. Benchmark methodology & source register</h3><p class="cp-muted">The sources below support KPI definitions, data collection and selected historical reference points. They do not establish a universal set of current Southern African heavy-truck targets.</p>
+        <ul class="cp-source-list">
+         <li><b>Logistics Cluster / World Food Programme — Fleet Performance Monitoring.</b> Recommends monthly collection of distance, fuel, workshop days, fuel/maintenance/repair/tyre costs, availability, utilisation, cost/km and safety incidents. It explicitly says fuel consumption varies with road conditions, load, idling, air-conditioning, age and service condition. Its generic truck fuel baseline is not suitable as a direct customer target without matching duty cycle. <a href="https://log.logcluster.org/en/fleet-performance-monitoring" target="_blank" rel="noopener">Open source and methodology ↗</a></li>
+         <li><b>National Academies — Review of the 21st Century Truck Partnership, Chapter 4.</b> Reports historical North American long-haul idling benchmarks as low as 5%, while warning that engine manufacturers calculate idle time differently. Treat 5% as a contextual reference only, not a pass/fail target for every KIZUNA customer. <a href="https://www.nationalacademies.org/read/21784/chapter/8" target="_blank" rel="noopener">Open source ↗</a></li>
+         <li><b>Natural Resources Canada — Fuel Efficiency Benchmarking in Canada's Trucking Industry.</b> Supports route-paired comparisons and collection of vehicle specification, average speed, idling and payload/GVW context. Its study is useful for comparison methodology, not direct African fuel economy targets. <a href="https://natural-resources.canada.ca/energy-efficiency/transportation-energy-efficiency/fuel-efficiency-benchmarking-canada-s-trucking-industry" target="_blank" rel="noopener">Open source ↗</a></li>
+         <li><b>South African Government Technical Advisory Centre — Comparative Spending Review of Fleet Management Practices.</b> Describes cost-per-kilometre calculation and data-quality limitations from odometer capture. It concerns public-sector car fleets, so use it for calculation methodology only, not heavy-truck norms. <a href="https://www.gtac.gov.za/wp-content/uploads/2024/11/Car-Fleets-Technical-Report.pdf" target="_blank" rel="noopener">Open report ↗</a></li>
+        </ul>
+        <div class="cp-note"><b>Future UD benchmark governance:</b> Build anonymised peer groups from consented, verified UD customer data. Publish a cohort target only when there are enough comparable vehicles and periods; show sample size, country/region, vehicle/application segment, date range, data completeness and methodology. Never expose another customer's identifiable data.</div>
+       </div>
       </section>
 
       <section class="cp-section" id="cpSec-cycle" hidden>
@@ -848,7 +973,7 @@ function cpLogin(){const email=document.getElementById('cpEmail').value.trim();c
 function cpDemoLogin(){document.getElementById('cpEmail').value='fleet.manager@example.com';document.getElementById('cpPassword').value='KizunaPilot2026';cpUser='fleet.manager@example.com';cpEnter()}
 function cpEnter(){document.getElementById('cpLoginView').hidden=true;document.getElementById('cpAppView').hidden=false;document.getElementById('cpAccountEmail').textContent=cpUser;document.getElementById('cpWelcome').textContent='Welcome, '+(cpData().profile?.company||'Fleet Manager');cpLoad();cpTab('home')}
 function cpLogout(){cpUser='';document.getElementById('cpLoginView').hidden=false;document.getElementById('cpAppView').hidden=true}
-function cpTab(t){document.querySelectorAll('.cp-section').forEach(s=>s.hidden=s.id!=='cpSec-'+t);document.querySelectorAll('.cp-nav button').forEach(b=>b.classList.toggle('active',b.dataset.cpTab===t));if(t==='home')cpRenderHome();if(t==='routes')cpRenderRoutes();if(t==='evidence')cpRenderEvidence();if(t==='benefits')cpRenderBenefits();if(t==='performance')cpRenderPerformance()}
+function cpTab(t){document.querySelectorAll('.cp-section').forEach(s=>s.hidden=s.id!=='cpSec-'+t);document.querySelectorAll('.cp-nav button').forEach(b=>b.classList.toggle('active',b.dataset.cpTab===t));if(t==='home')cpRenderHome();if(t==='routes')cpRenderRoutes();if(t==='evidence')cpRenderEvidence();if(t==='benefits')cpRenderBenefits();if(t==='performance')cpRenderPerformance();if(t==='tpol')cpCalculateTpol(false);if(t==='benchmark')cpLoadBenchmark()}
 function cpProfile(){return cpData().profile||{}}
 function cpLoad(){
  const d=cpData(),p=d.profile||{};
@@ -856,7 +981,7 @@ function cpLoad(){
  cpRenderLocations(p.locations||[]);
  if(d.cycle){Object.entries(d.cycle).forEach(([k,v])=>{const el=document.getElementById('cp'+k);if(el&&k!=='Makes')el.value=v});const selected=Array.isArray(d.cycle.Makes)?d.cycle.Makes:String(d.cycle.Makes||'').split(',').map(x=>x.trim());document.querySelectorAll('input[name="cpMakes"]').forEach(el=>el.checked=selected.includes(el.value))}
  if(d.assessment){Object.entries(d.assessment).forEach(([k,v])=>{const el=document.getElementById('cp'+k);if(el)el.value=v})}
- cpRenderVehicles();cpRenderRoutes();cpRenderEvidence();cpRenderHome();cpRenderActions()
+ cpRenderVehicles();cpRenderRoutes();cpRenderEvidence();cpRenderHome();cpRenderActions();cpLoadTpol()
 }
 function cpSaveProfile(){
  const d=cpData();d.profile={company:cpCompany.value.trim(),country:cpCountry.value,industry:cpIndustry.value,website:cpWebsite.value,city:cpCity.value,address:cpAddress.value,latitude:cpLatitude.value,longitude:cpLongitude.value,employees:cpEmployees.value,drivers:cpDrivers.value,contact:cpContact.value,phone:cpPhone.value,contactEmail:cpContactEmail.value,owner:cpOwner.value,businessOwner:cpBusinessOwner.value,procurement:cpProcurement.value,workshopManager:cpWorkshopManager.value,financeContact:cpFinanceContact.value,decisionMaker:cpDecisionMaker.value,ownWorkshop:cpOwnWorkshop.value,workshopBays:cpWorkshopBays.value,technicians:cpTechnicians.value,servicing:cpServicing.value,majorRepairs:cpMajorRepairs.value,maintenanceContracts:cpMaintenanceContracts.value,power:cpPower.value,axle:cpAxle.value,cab:cpCab.value,vehicleApplication:cpVehicleApplication.value,transmission:cpTransmission.value,payload:cpPayload.value,fuelType:cpFuelType.value,originPreference:cpOriginPreference.value,otherSpecs:cpOtherSpecs.value,coverage:cpCoverage.value,crossBorder:cpCrossBorder.value,countries:cpCountries.value,commodities:cpCommodities.value,operatingHours:cpOperatingHours.value,environment:cpEnvironment.value,profileConsent:cpProfileConsent.checked,mapConsent:cpMapConsent.checked,email:cpUser,locations:cpReadLocations()};cpSave(d);document.getElementById('cpWelcome').textContent='Welcome, '+(d.profile.company||'Fleet Manager');cpRenderHome();alert('Customer profile saved on this device.')}
@@ -893,10 +1018,10 @@ function cpRenderHome(){
  const af=['AnnualKm','Fuel','Idle','Availability','Maint','Downtime','Telematics','DataPeriod','Challenges','Help'],ad=af.filter(k=>String(a[k]||'').trim()).length,ap=Math.round(ad/af.length*100);
  const rp=routes.length?Math.round(routes.filter(r=>r.origin&&r.destination&&r.distance&&r.frequency).length/routes.length*100):0;
  const verified=evidence.filter(x=>/verified/i.test(x.status||'')).length,ep=evidence.length?Math.max(50,Math.round(verified/evidence.length*100)):0;
- const c=d.cycle||{},brandCount=Array.isArray(c.Makes)?c.Makes.length:String(c.Makes||'').split(',').filter(x=>x.trim()).length;const cycleFields=['Cycle','ReviewDate','Units12','Units24','PurchaseWindow','BuyingFactors'];const cycleDone=cycleFields.filter(k=>String(c[k]??'').trim()).length+(brandCount?1:0),cyclePct=Math.round(cycleDone/7*100);const rings=[['Customer Profile',pp,'profile',pp===100,`${pd}/${pf.length} details completed`],['My Fleet',fp,'fleet',fp===100&&vehicles.length>0,`${vehicles.length} vehicles registered`],['Buying Cycle',cyclePct,'cycle',cyclePct===100,`${cycleDone}/7 buying-cycle details completed`],['Fleet Assessment',ap,'assessment',ap===100,`${ad}/${af.length} assessment items`],['My Routes',rp,'routes',rp===100&&routes.length>0,`${routes.length} routes registered`],['Evidence Centre',ep,'evidence',evidence.length>0&&verified===evidence.length,`${evidence.length} submitted · ${verified} verified`],['Fleet Performance',100,'performance',true,'Demo performance dashboard available']];
+ const c=d.cycle||{},brandCount=Array.isArray(c.Makes)?c.Makes.length:String(c.Makes||'').split(',').filter(x=>x.trim()).length;const cycleFields=['Cycle','ReviewDate','Units12','Units24','PurchaseWindow','BuyingFactors'];const cycleDone=cycleFields.filter(k=>String(c[k]??'').trim()).length+(brandCount?1:0),cyclePct=Math.round(cycleDone/7*100);const rings=[['Customer Profile',pp,'profile',pp===100,`${pd}/${pf.length} details completed`],['My Fleet',fp,'fleet',fp===100&&vehicles.length>0,`${vehicles.length} vehicles registered`],['Buying Cycle',cyclePct,'cycle',cyclePct===100,`${cycleDone}/7 buying-cycle details completed`],['Fleet Assessment',ap,'assessment',ap===100,`${ad}/${af.length} assessment items`],['My Routes',rp,'routes',rp===100&&routes.length>0,`${routes.length} routes registered`],['Evidence Centre',ep,'evidence',evidence.length>0&&verified===evidence.length,`${evidence.length} submitted · ${verified} verified`],['Fleet Performance',0,'performance',false,'Illustrative telematics report available'],['My TPOL',cpTpolCompletion(d.tpol||{}),'tpol',cpTpolCompletion(d.tpol||{})===100,'Vehicle profitability baseline'],['Fleet Benchmark',cpBenchmarkCompletion(d.benchmark||{}),'benchmark',cpBenchmarkCompletion(d.benchmark||{})===100,'Six performance indicators']];
  document.getElementById('cpProgressRings').innerHTML=rings.map(r=>`<button class="cp-ring-card ${r[3]?'complete':''}" onclick="cpTab('${r[2]}')"><span class="cp-ring" style="--pct:${r[1]}"><b>${r[1]}%</b></span><span class="cp-ring-title">${r[0]}</span><span class="cp-ring-state">${r[3]?'Complete':r[1]?'In progress':'Not started'}</span></button>`).join('');
  const overall=Math.round(rings.reduce((s,r)=>s+r[1],0)/rings.length),pending=[];
- const tasks=[['Complete customer profile',pp===100,'profile',`${pd}/${pf.length} details`],['Complete core fleet details',fp===100&&vehicles.length>0,'fleet',`${vehicles.length} vehicles registered`],['Complete buying cycle',cyclePct===100,'cycle',`${cycleDone}/7 details`],['Complete fleet assessment',ap===100,'assessment',`${ad}/${af.length} items`],['Register main transport routes',rp===100&&routes.length>0,'routes',`${routes.length} routes`],['Submit supporting evidence',evidence.length>0,'evidence',`${evidence.length} documents`],['Have evidence verified',evidence.length>0&&verified===evidence.length,'evidence',`${verified}/${evidence.length} verified`],['Review Fleet Performance','false','performance','Illustrative telematics report available']];
+ const tasks=[['Complete customer profile',pp===100,'profile',`${pd}/${pf.length} details`],['Complete core fleet details',fp===100&&vehicles.length>0,'fleet',`${vehicles.length} vehicles registered`],['Complete buying cycle',cyclePct===100,'cycle',`${cycleDone}/7 details`],['Complete fleet assessment',ap===100,'assessment',`${ad}/${af.length} items`],['Register main transport routes',rp===100&&routes.length>0,'routes',`${routes.length} routes`],['Submit supporting evidence',evidence.length>0,'evidence',`${evidence.length} documents`],['Have evidence verified',evidence.length>0&&verified===evidence.length,'evidence',`${verified}/${evidence.length} verified`],['Review Fleet Performance',true,'performance','Illustrative telematics report available'],['Build a vehicle TPOL baseline',cpTpolCompletion(d.tpol||{})===100,'tpol',`${cpTpolCompletion(d.tpol||{})}% of TPOL inputs completed`]];
  tasks.filter(t=>!t[1]).forEach(t=>pending.push(t));
  document.getElementById('cpOverallStatus').textContent=`${overall}% overall information progress`;
  document.getElementById('cpActionChecklist').innerHTML=(pending.length?pending.slice(0,5):[['Your information is complete',true,'home','Keep your fleet information updated']]).map(t=>`<div class="cp-action-row"><div><strong>${t[0]}</strong><small>${t[3]}</small></div><button class="cp-btn secondary" onclick="cpTab('${t[2]}')">${t[1]?'Review':'Complete'}</button></div>`).join('');
@@ -989,6 +1114,40 @@ function cpRenderPerformance(){
  document.getElementById('cpTelematicsCoverage').innerHTML=[['Total registered fleet',total,'All makes in customer fleet register'],['UD vehicles',udCount,'Registered UD trucks'],['Telematics-connected UD vehicles',connected,'Illustrative connected vehicles'],['Potential connectivity opportunity',Math.max(0,udCount-connected),'Subject to equipment and service eligibility']].map(x=>`<div class="cp-metric-card"><span>${x[0]}</span><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
  document.getElementById('cpTelematicsHistory').innerHTML=`<table class="cp-table"><thead><tr><th>Reporting month</th><th>Distance</th><th>Fuel economy</th><th>Idle time</th><th>Utilisation</th><th>Alerts</th></tr></thead><tbody>${['oct','nov'].map(k=>{const f=CP_TELEMATICS_DEMO[k].fleet;return `<tr><td>${CP_TELEMATICS_DEMO[k].label}</td><td>${f.distance.toLocaleString()} km</td><td>${f.fuel.toFixed(2)} km/L</td><td>${f.idle}%</td><td>${f.util}%</td><td>${f.alerts}</td></tr>`}).join('')}</tbody></table>`;
 }
+
+
+const CP_BENCH_FIELDS=['Vehicle','Application','Period','Payload','Route','DataStatus','Fuel','FuelTarget','Idle','IdleTarget','Util','UtilTarget','Avail','AvailTarget','Maint','MaintTarget','Cost','CostTarget'];
+function cpBenchmarkCompletion(b){const keys=['Fuel','Idle','Util','Avail','Maint','Cost'];return Math.round(keys.filter(k=>String(b[k]??'').trim()!==''&&Number.isFinite(Number(b[k]))).length/keys.length*100)}
+function cpBenchRead(){const b={};CP_BENCH_FIELDS.forEach(k=>{const e=document.getElementById('cpBench'+k);if(e)b[k]=e.value});return b}
+function cpLoadBenchmark(){const b=cpData().benchmark||{};CP_BENCH_FIELDS.forEach(k=>{const e=document.getElementById('cpBench'+k);if(e&&b[k]!==undefined)e.value=b[k]});cpRenderBenchmark()}
+function cpSaveBenchmark(){const d=cpData();d.benchmark={...(d.benchmark||{}),...cpBenchRead(),savedAt:new Date().toISOString()};cpSave(d);document.getElementById('cpBenchSaveStatus').textContent='Benchmark baseline saved on this device · '+(d.benchmark.Period||'Period not stated')+' · '+(d.benchmark.DataStatus||'Status not stated');cpRenderBenchmark();cpRenderHome()}
+function cpRenderBenchmark(){const b={...(cpData().benchmark||{}),...cpBenchRead()};const defs=[
+ {key:'Fuel',target:'FuelTarget',name:'Fuel efficiency',unit:'km/L',higher:true,fmt:v=>Number(v).toFixed(2)},
+ {key:'Idle',target:'IdleTarget',name:'Engine idling',unit:'%',higher:false,fmt:v=>Number(v).toFixed(1)},
+ {key:'Util',target:'UtilTarget',name:'Vehicle utilisation',unit:'%',higher:true,fmt:v=>Number(v).toFixed(1)},
+ {key:'Avail',target:'AvailTarget',name:'Vehicle availability',unit:'%',higher:true,fmt:v=>Number(v).toFixed(1)},
+ {key:'Maint',target:'MaintTarget',name:'Maintenance cost',unit:'R/km',higher:false,fmt:v=>'R'+Number(v).toFixed(2)},
+ {key:'Cost',target:'CostTarget',name:'Total operating cost',unit:'R/km',higher:false,fmt:v=>'R'+Number(v).toFixed(2)}];
+ const ring=document.getElementById('cpBenchmarkRings');if(!ring)return;ring.innerHTML=defs.map(x=>{const v=Number(b[x.key]),t=Number(b[x.target]),has=String(b[x.key]??'').trim()!==''&&Number.isFinite(v),hasT=String(b[x.target]??'').trim()!==''&&Number.isFinite(t)&&t>0;let pct=has?35:0,state=has?'Baseline entered':'Awaiting data',detail=has?x.fmt(v)+' '+x.unit:'Add measured result';if(has&&hasT){const ratio=x.higher?v/t:t/v;pct=Math.max(0,Math.min(100,Math.round(ratio*100)));state=(x.higher?v>=t:v<=t)?'At / better than target':'Improvement opportunity';detail=x.fmt(v)+' · target '+x.fmt(t)}else if(has&&x.key==='Idle'){detail=x.fmt(v)+'% · historical ref '+x.fmt(5)+'%';state=v<=5?'At / below historical reference':'Above historical reference';pct=Math.max(0,Math.min(100,Math.round(5/Math.max(v,5)*100)))}else if(has){state='Target to be agreed';detail=x.fmt(v)+' '+x.unit}return `<div class="cp-benchmark-ring"><div class="cp-benchmark-circle" style="--pct:${pct}"><b>${has?Math.round(pct)+'%':'—'}</b></div><strong>${x.name}</strong><small>${detail}<br>${state}</small></div>`}).join('');
+ const acts=[['Fuel efficiency','Compare fuel economy by route, payload, driver and vehicle configuration.'],['Idle time','Separate unavoidable operating idle from controllable idling and align the engine-time definition.'],['Utilisation','Check dispatch demand, loading, waiting time and fleet capacity before raising targets.'],['Availability','Separate planned service downtime from unplanned failures and measure both consistently.'],['Maintenance cost/km','Compare like-for-like age, mileage, service coverage and included repair categories.'],['Operating cost/km','Reconcile fuel, driver, tyres, maintenance, insurance and other agreed costs; link to TPOL.']];
+ document.getElementById('cpBenchmarkActions').innerHTML=acts.map(a=>`<div class="cp-card"><strong>${a[0]}</strong><p>${a[1]}</p><span class="cp-status">Dealer review</span></div>`).join('');
+ const status=document.getElementById('cpBenchSaveStatus');if(status&&b.savedAt)status.textContent='Saved baseline available on this device · '+(b.Period||'period not stated');
+}
+function cpApproveBenchmark(kind){const d=cpData();d.benchmark=d.benchmark||{};const key=kind==='assessment'?'benchmark-assessment':'benchmark-improvement';const pts=500;const label=kind==='assessment'?'Verified fleet benchmark assessment':'Verified benchmark improvement milestone';if(d.benchmark[key]){document.getElementById('cpBenchPointsStatus').textContent='This demo milestone has already been approved.';return}d.benchmark[key]=true;cpSave(d);cpAwardPoints(pts,label);document.getElementById('cpBenchPointsStatus').textContent=label+' · '+pts+' points simulated. Reviewer approval only.';cpRenderHome()}
+
+const CP_TPOL_FIELDS=['Vehicle','Application','Purchase','Interest','Residual','Life','Age','Km','Revenue','Fuel','Driver','Maint','Tyres','Insurance','Licences','Other'];
+function cpTpolCompletion(t){const keys=['Vehicle','Purchase','Interest','Residual','Life','Age','Km','Revenue','Fuel','Driver','Maint','Tyres','Insurance','Licences','Other'];const n=keys.filter(k=>String(t[k]??'').trim()!==''&&Number(t[k])>=0).length;return Math.round(n/keys.length*100)}
+function cpLoadTpol(){const t=cpData().tpol||{};CP_TPOL_FIELDS.forEach(k=>{const el=document.getElementById('cpTpol'+k);if(el&&t[k]!==undefined)el.value=t[k]});['Status','Period','PurchaseEvidence','FuelEvidence','MaintEvidence','RevenueEvidence'].forEach(k=>{const el=document.getElementById('cpTpol'+k);if(el&&t[k]!==undefined)el.value=t[k]});cpCalculateTpol(false);if(t.PurchaseEvidence||t.FuelEvidence||t.MaintEvidence||t.RevenueEvidence)document.getElementById('cpTpolEvidenceStatus').textContent='Evidence references saved on this device.'}
+function cpTpolRead(){const t={};CP_TPOL_FIELDS.forEach(k=>{const el=document.getElementById('cpTpol'+k);t[k]=el?el.value.trim():''});['Status','Period','PurchaseEvidence','FuelEvidence','MaintEvidence','RevenueEvidence'].forEach(k=>{const el=document.getElementById('cpTpol'+k);t[k]=el?el.value.trim():''});return t}
+function cpMoney(n){return 'R '+Math.round(Number(n)||0).toLocaleString('en-ZA')}
+function cpCalculateTpol(save){const t=cpTpolRead();const val=k=>Math.max(0,Number(t[k])||0);const monthlyCosts=['Fuel','Driver','Maint','Tyres','Insurance','Licences','Other'].reduce((a,k)=>a+val(k),0);const revenue=val('Revenue'),monthlyProfit=revenue-monthlyCosts,km=val('Km');const lifeMonths=val('Life')*12,operatedMonths=Math.min(lifeMonths,val('Age')*12),remainingMonths=Math.max(0,lifeMonths-operatedMonths);const operatingProfitToDate=monthlyProfit*operatedMonths,forecastOperatingProfit=monthlyProfit*remainingMonths;const ownershipCost=val('Purchase')+val('Interest');const lifetimeProfit=operatingProfitToDate+forecastOperatingProfit-ownershipCost+val('Residual');const lifetimeRevenue=revenue*lifeMonths,lifetimeOperatingCosts=monthlyCosts*lifeMonths;const totalDistance=km*lifeMonths;const costPerKm=totalDistance?((lifetimeOperatingCosts+ownershipCost-val('Residual'))/totalDistance):0;const profitPerKm=totalDistance?lifetimeProfit/totalDistance:0;const margin=lifetimeRevenue?lifetimeProfit/lifetimeRevenue*100:0;
+ const kpis=[['Monthly operating profit',cpMoney(monthlyProfit),'Revenue less monthly operating costs'],['Operating cost per km',km?cpMoney(monthlyCosts/km):'—','Monthly operating costs ÷ monthly km'],['Lifetime projected profit',cpMoney(lifetimeProfit),'Operating profit over full life − investment/interest + residual'],['Lifetime profit margin',margin.toFixed(1)+'%','Projected lifetime profit ÷ projected lifetime revenue'],['Lifetime distance',Math.round(totalDistance).toLocaleString('en-ZA')+' km','Monthly distance × expected working life'],['Remaining operating years',Math.max(0,(remainingMonths/12)).toFixed(1)+' years','Expected life less time already in service'],['Lifetime cost per km',totalDistance?cpMoney(costPerKm):'—','Operating + ownership costs, less residual ÷ lifetime km'],['Lifetime profit per km',totalDistance?cpMoney(profitPerKm):'—','Projected lifetime profit ÷ lifetime km']];
+ const box=document.getElementById('cpTpolKpis');if(!box)return;box.innerHTML=kpis.map(x=>`<div class="cp-tpol-kpi"><span>${x[0]}</span><strong>${x[1]}</strong><small>${x[2]}</small></div>`).join('');
+ document.getElementById('cpTpolResultStatus').textContent=(t.Status||'Customer estimate').toUpperCase();document.getElementById('cpTpolBreakdown').innerHTML=`<b>Expected working life:</b> ${lifeMonths.toLocaleString()} months<br><b>Operating period to date:</b> ${operatedMonths.toLocaleString()} months<br><b>Remaining forecast period:</b> ${remainingMonths.toLocaleString()} months<br><b>Lifetime revenue:</b> ${cpMoney(lifetimeRevenue)}<br><b>Lifetime operating costs:</b> ${cpMoney(lifetimeOperatingCosts)}<br><b>Vehicle purchase + finance interest:</b> ${cpMoney(ownershipCost)}<br><b>Less estimated residual value:</b> ${cpMoney(val('Residual'))}<br><b>Projected lifetime profit:</b> ${cpMoney(lifetimeProfit)}<br><br><small>Operating profit to date: ${cpMoney(operatingProfitToDate)} · Remaining operating profit forecast: ${cpMoney(forecastOperatingProfit)}</small>`;
+ document.getElementById('cpTpolInterpretation').innerHTML=monthlyProfit>=0?`At the entered monthly run-rate, the vehicle generates an estimated operating surplus of <b>${cpMoney(monthlyProfit)}</b> per month before vehicle investment and finance interest. The full-life model projects <b>${cpMoney(lifetimeProfit)}</b> after the entered purchase cost, finance interest and residual value. Validate revenue allocation and all cost categories before relying on the result.`:`At the entered monthly run-rate, operating costs exceed revenue by <b>${cpMoney(Math.abs(monthlyProfit))}</b> per month, before vehicle investment and finance interest. Review the revenue and cost inputs, route, payload, fuel use and utilisation with the dealer.`;
+ if(save){const d=cpData();d.tpol=t;cpSave(d);document.getElementById('cpTpolSaveStatus').textContent='TPOL inputs saved on this device · '+new Date().toLocaleString();cpRenderHome()}else if(document.getElementById('cpTpolSaveStatus'))document.getElementById('cpTpolSaveStatus').textContent='Live calculation · save to retain your inputs.';
+}
+function cpSaveTpolEvidence(){const d=cpData();d.tpol={...(d.tpol||{}),...cpTpolRead()};cpSave(d);document.getElementById('cpTpolEvidenceStatus').textContent='Evidence references saved on this device.'}
 
 function cpRenderActions(){document.getElementById('cpActionsList').innerHTML='<div class="cp-card"><strong>Fuel efficiency review</strong><p>Agree a baseline and review actual fuel performance by route.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>Route and utilisation review</strong><p>Identify route constraints, utilisation opportunities and operating patterns.</p><span class="cp-status">Proposed</span></div><div class="cp-card"><strong>TPOL fleet assessment</strong><p>Explore telematics visibility, driver coaching, idling and fleet performance opportunities.</p><span class="cp-status">To be discussed</span></div><div class="cp-card"><strong>Customer performance story</strong><p>Measure verified progress over time; publication requires separate customer approval.</p><span class="cp-status">Future milestone</span></div>'}
 function cpEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
